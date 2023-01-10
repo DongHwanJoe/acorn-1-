@@ -40,7 +40,7 @@ public class UsersDto {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}

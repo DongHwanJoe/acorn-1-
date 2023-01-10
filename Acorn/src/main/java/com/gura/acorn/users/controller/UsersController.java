@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,11 @@ public class UsersController {
 		mView.setViewName("users/signup");
 		return mView;
 	}
+	
+	//회원 가입시 validation 체크입니다! 틀렸을 수도 있습니다!
+	
+	
+	
 	//로그인 폼 요청 처리
 	@RequestMapping(method=RequestMethod.GET, value="/users/loginform")
 	public String loginForm() {
@@ -134,4 +140,6 @@ public class UsersController {
 		//서비스를 이용해서 이미지를 upload 폴더에 저장하고 리턴되는 Map 을 리턴해서 json 문자열 응답하기
 		return service.saveProfileImage(request, image);
 	}
+	
+	
 }
