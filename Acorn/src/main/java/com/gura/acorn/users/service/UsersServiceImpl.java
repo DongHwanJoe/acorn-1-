@@ -59,6 +59,8 @@ public class UsersServiceImpl implements UsersService{
 		if(resultDto != null) {
 			//Bcrypt 클래스의 static 메소드를 이용해서 입력한 비밀번호와 암호화 해서 저장된 비밀번호 일치 여부를 알아내야한다.
 			isValid = BCrypt.checkpw(dto.getPwd(), resultDto.getPwd());
+		}else {
+			throw new BanException("로그인할 수 없는 사용자입니다.");
 		}
 		
 		if(resultDto.getBan() != null) { // 만일 getBan 에 담긴 값이 없다면? => 일반유저
