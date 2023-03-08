@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,9 @@ public class ElasticsearchService {
     public Map<String, Object> aggregateByMonth1(String indexName) throws IOException {
     	// date_histogram 집계 쿼리를 작성합니다.
     	SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+    	SearchSourceBuilder uvSourceBuilder = new SearchSourceBuilder();
     	SearchRequest searchRequest = new SearchRequest(indexName);
+    	SearchRequest uvSearchRequest = new SearchRequest("uvtest");
     	
     	AggregationBuilder dateAggregation = AggregationBuilders.dateHistogram("date_count")
                 .field("date")
@@ -81,29 +84,34 @@ public class ElasticsearchService {
     			.size(1)
     			.order(BucketOrder.count(false));
     	
+    	uvSourceBuilder.aggregation(dateAggregation);
+    	
     	storeAggregation.subAggregation(storeIdAggregation);
     	dateAggregation.subAggregation(categoryAggregation);
     	dateAggregation.subAggregation(storeAggregation);
         sourceBuilder.aggregation(dateAggregation);
         
         searchRequest.source(sourceBuilder);
+        uvSearchRequest.source(uvSourceBuilder);
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-
+        SearchResponse uvSearchResponse = client.search(uvSearchRequest, RequestOptions.DEFAULT);
+        
         // 그룹별 개수를 저장할 Map 객체 생성
         TreeMap<String, Object> groupCounts = new TreeMap<>();
 
         // aggregation 결과 파싱
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-        Histogram agg = searchResponse.getAggregations().get("date_count");
-        for (Histogram.Bucket bucket : agg.getBuckets()) {
+        Histogram pvAgg = searchResponse.getAggregations().get("date_count");
+        for (Histogram.Bucket bucket : pvAgg.getBuckets()) {
             String groupKey = bucket.getKeyAsString();
             LocalDateTime date = LocalDateTime.parse(groupKey, DateTimeFormatter.ISO_DATE_TIME);
             String formattedDate = date.format(formatter);
             long docCount = bucket.getDocCount();
             
             TreeMap<String, Object> pvCounts = new TreeMap<>();
-            pvCounts.put("total", docCount);
+            
+            pvCounts.put("totalPV", docCount);
             Terms storeAgg = bucket.getAggregations().get("store_count");
             if (storeAgg.getBuckets().size() > 0) {
             	String storeName = storeAgg.getBuckets().get(0).getKeyAsString();
@@ -117,7 +125,6 @@ public class ElasticsearchService {
                 }
         	}
             
-            
 			Terms categoryAgg = bucket.getAggregations().get("category_count");
             for (Terms.Bucket categoryBucket : categoryAgg.getBuckets()) {
             	String category = categoryBucket.getKeyAsString();
@@ -126,6 +133,20 @@ public class ElasticsearchService {
         	}
             
             groupCounts.put(formattedDate, pvCounts);        
+        }
+        
+        Histogram uvAgg = uvSearchResponse.getAggregations().get("date_count");
+        for (Histogram.Bucket bucket : uvAgg.getBuckets()) {
+            String groupKey = bucket.getKeyAsString();
+            LocalDateTime date = LocalDateTime.parse(groupKey, DateTimeFormatter.ISO_DATE_TIME);
+            String formattedDate = date.format(formatter);
+            long docCount = bucket.getDocCount();
+            
+            Object value = groupCounts.get(formattedDate);
+            Object[] array = (Object[]) value;
+            Object[] newArray = Arrays.copyOf(array, array.length + 1);
+            newArray[array.length] = new HashMap<String, Object>() {{ put("totalUV", docCount); }};
+            groupCounts.put(formattedDate, newArray);
         }
 
         return groupCounts;
@@ -167,19 +188,24 @@ public class ElasticsearchService {
     
     
     //index의 모든 id값의 개수를 추출
-    public Map<String, Object> getCountOfIdsFromIndex(String indexName, String keyName) throws IOException {
-        SearchRequest searchRequest = new SearchRequest(indexName);
+    public Map<String, Object> getTotalCount() throws IOException {
+        SearchRequest pvSearchRequest = new SearchRequest("testlog6");
+        SearchRequest uvSearchRequest = new SearchRequest("uvtest");
+        
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         searchSourceBuilder.size(0); // 결과를 받지 않고 개수만 필요한 경우 0으로 설정
-        searchSourceBuilder.timeout(TimeValue.timeValueMinutes(2));
 
-        searchRequest.source(searchSourceBuilder);
+        pvSearchRequest.source(searchSourceBuilder);
+        uvSearchRequest.source(searchSourceBuilder);
 
-        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+        SearchResponse pvSearchResponse = client.search(pvSearchRequest, RequestOptions.DEFAULT);
+        SearchResponse uvSearchResponse = client.search(uvSearchRequest, RequestOptions.DEFAULT);
         
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put(keyName, searchResponse.getHits().getTotalHits().value);
+        
+        resultMap.put("totalPV", pvSearchResponse.getHits().getTotalHits().value);
+        resultMap.put("totalUV", uvSearchResponse.getHits().getTotalHits().value);
         
         return resultMap;
     }

@@ -135,12 +135,15 @@ public class LoggingInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         long startTime = (long) request.getAttribute("startTime");
         long endTime = System.currentTimeMillis();
-        long executeTime = endTime - startTime;     
+        long executeTime = endTime - startTime;   
+//        String url = request.getRequestURL().toString();
+        System.out.println(executeTime);
         
 		map2.put("errorCode", "OK");
 		map2.put("time", LocalDateTime.now().toString());
 		map2.put("elapsedTime", executeTime);
 		map2.put("errorMsg", null);
+//		map2.put("errorUrl", url);
 		
 		try {
 			ElasticUtil.getInstance().create("test4", map);
