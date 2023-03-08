@@ -55,6 +55,7 @@ public class ElasticsearchService {
     
     RestHighLevelClient client = RestClients.create(clientConfiguration).rest();
     
+    //모든 데이터를 한 달 단위로 나누어 각 필드별로 집계
     public Map<String, Object> aggregateByMonth1(String indexName) throws IOException {
     	// date_histogram 집계 쿼리를 작성합니다.
     	SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -130,38 +131,43 @@ public class ElasticsearchService {
         return groupCounts;
     }
     
-    
+    //모든 데이터를 한 달 단위로 나누어 집계
     public Map<String, Object> aggregateByMonth(String indexName) throws IOException {
     	// date_histogram 집계 쿼리를 작성합니다.
     	SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
     	SearchRequest searchRequest = new SearchRequest(indexName);
-    	sourceBuilder.aggregation(
-    	        AggregationBuilders.dateHistogram("monthly")
-    	                .field("date")
-    	                .calendarInterval(DateHistogramInterval.MONTH)
-    	                .format("yyyy-MM")
-    	);
-
-    	// Elasticsearch에 쿼리를 보내서 결과를 받아옵니다.
-    	searchRequest.source(sourceBuilder);
-    	SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
     	
-    	// Elasticsearch에서 반환된 결과를 Map<String, Object> 형식으로 변환합니다.
-    	Map<String, Object> resultMap = new HashMap<>();
-    	Histogram monthlyHistogram = searchResponse.getAggregations().get("monthly");
-    	for (Histogram.Bucket monthlyBucket : monthlyHistogram.getBuckets()) {
-    	    Map<String, Object> monthlyAggMap = new HashMap<>();
-    	    monthlyAggMap.put("month", monthlyBucket.getKeyAsString());
-    	    monthlyAggMap.put("count", monthlyBucket.getDocCount());
-    	    resultMap.put("monthlyAggMap", monthlyAggMap);
-    	}
+    	AggregationBuilder dateAggregation = AggregationBuilders.dateHistogram("date_count")
+                .field("date")
+                .calendarInterval(DateHistogramInterval.MONTH)
+                .order(BucketOrder.key(true));
+    	
+        sourceBuilder.aggregation(dateAggregation);
+        searchRequest.source(sourceBuilder);
 
-    	// 결과를 반환합니다.
-    	return resultMap;
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        // 그룹별 개수를 저장할 Map 객체 생성
+        TreeMap<String, Object> groupCounts = new TreeMap<>();
+
+        // aggregation 결과 파싱
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        Histogram agg = searchResponse.getAggregations().get("date_count");
+        for (Histogram.Bucket bucket : agg.getBuckets()) {
+            String groupKey = bucket.getKeyAsString();
+            LocalDateTime date = LocalDateTime.parse(groupKey, DateTimeFormatter.ISO_DATE_TIME);
+            String formattedDate = date.format(formatter);
+            long docCount = bucket.getDocCount();
+            
+            groupCounts.put(formattedDate, docCount);
+        }
+
+        return groupCounts;
     }
     
+    
     //index의 모든 id값의 개수를 추출
-    public Map<String, Object> getCountOfIdsFromIndex(String indexName) throws IOException {
+    public Map<String, Object> getCountOfIdsFromIndex(String indexName, String keyName) throws IOException {
         SearchRequest searchRequest = new SearchRequest(indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
@@ -173,7 +179,7 @@ public class ElasticsearchService {
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
         
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("PVTotalCount", searchResponse.getHits().getTotalHits().value);
+        resultMap.put(keyName, searchResponse.getHits().getTotalHits().value);
         
         return resultMap;
     }
