@@ -135,19 +135,23 @@ public class ElasticsearchService {
             groupCounts.put(formattedDate, pvCounts);        
         }
         
-        Histogram uvAgg = uvSearchResponse.getAggregations().get("date_count");
-        for (Histogram.Bucket bucket : uvAgg.getBuckets()) {
-            String groupKey = bucket.getKeyAsString();
-            LocalDateTime date = LocalDateTime.parse(groupKey, DateTimeFormatter.ISO_DATE_TIME);
-            String formattedDate = date.format(formatter);
-            long docCount = bucket.getDocCount();
-            
-            Object value = groupCounts.get(formattedDate);
-            Object[] array = (Object[]) value;
-            Object[] newArray = Arrays.copyOf(array, array.length + 1);
-            newArray[array.length] = new HashMap<String, Object>() {{ put("totalUV", docCount); }};
-            groupCounts.put(formattedDate, newArray);
-        }
+//        Histogram uvAgg = uvSearchResponse.getAggregations().get("date_count");
+//        for (Histogram.Bucket bucket : uvAgg.getBuckets()) {
+//            String groupKey = bucket.getKeyAsString();
+//            LocalDateTime date = LocalDateTime.parse(groupKey, DateTimeFormatter.ISO_DATE_TIME);
+//            String formattedDate = date.format(formatter);
+//            long docCount = bucket.getDocCount();
+//            
+//            Map<String, Object> uvCount = new HashMap<>();
+//            uvCount.put("totalUV", docCount);
+//            Map<String, Object> value = (Map<String, Object>) groupCounts.get(formattedDate);
+//            if (value != null) {
+//                Object[] array = value.values().toArray();
+//                Map<String, Object> newArray = Arrays.copyOf(array, array.length + 1);
+//                newArray[array.length] = uvCount;
+//            }
+//            groupCounts.put(formattedDate, newArray);
+//        }
 
         return groupCounts;
     }
@@ -268,14 +272,14 @@ public class ElasticsearchService {
         return resultMap;
     }
     
-    public Map<String, Object> searchDayPV(String indexName, String field, Object start) throws IOException {
+    public Map<String, Object> searchDayPV(String indexName) throws IOException {
         SearchRequest searchRequest = new SearchRequest(indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-
+        
         RangeQueryBuilder rangeQuery = QueryBuilders
-                .rangeQuery(field)
-                .gte(start)
-                .lte(start)
+                .rangeQuery("date")
+                .gte(LocalDate.now().minusDays(1))
+                .lte(LocalDate.now().minusDays(1))
                 .format("yyyy-MM-dd");
 
         searchSourceBuilder.query(rangeQuery);
