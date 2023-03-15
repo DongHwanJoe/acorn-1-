@@ -261,7 +261,10 @@
     //id = 아이디
     //date = 혹시 필요할지 몰라서 시간 정보도 포함
   	function sendMessages() {
-        const msg = document.querySelector("#msg").value;
+  		const msg = document.querySelector("#msg").value.trim(); // trim()으로 입력값 양쪽 공백 제거
+  	    if (!msg) { // 입력값이 없으면 함수 종료
+  	        return;
+  	    }
         var clientID = sessionStorage.getItem("clientID");
         var msg1 = {
         	    type: "message",
