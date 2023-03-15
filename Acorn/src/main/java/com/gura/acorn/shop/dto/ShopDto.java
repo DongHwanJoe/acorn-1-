@@ -19,8 +19,7 @@ public class ShopDto {
 	private int startRowNum;
 	private int endRowNum;
 
-	public ShopDto() {
-	}
+	public ShopDto() {}
 
 	public ShopDto(int num, String title, String content, String imagePath, String categorie, int viewCount, int rCount,
 			double grade, String startTime, String endTime, String telNum, String addr, int startRowNum,
@@ -153,7 +152,4 @@ public class ShopDto {
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
 	}
-
-	
-
 }

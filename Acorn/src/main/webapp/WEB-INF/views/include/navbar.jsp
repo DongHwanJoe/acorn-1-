@@ -3,135 +3,112 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="header_inner" style="border: 1px solid #ededed">
 	<div class="sm_menu">
-		<img
-			src="${pageContext.request.contextPath}/resources/images/hidden_menu.png"
-			alt="" />
+		<img src="${pageContext.request.contextPath}/resources/images/hidden_menu.png" alt="" />
 	</div>
+
 	<c:choose>
 		<c:when test="${ empty sessionScope.id}">
 			<a href="${pageContext.request.contextPath}/" class="logo_text">
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-				<div id="simple-list-example"
-					class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
-						id="category">CATEGORY</a>
+				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a>
 					<c:if test="${param.thisPage eq 'index' }">
 						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
 					</c:if>
-					<a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  }
-						id="research">RESEARCH</a>
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">RESEARCH</a>
 				</div>
+				
 				<div class="search_menu">
 					<div class="search_bar">
-						<form action="${pageContext.request.contextPath}/search/search"
-							method="post">
+						<form action="${pageContext.request.contextPath}/search/search" method="post">
 							<div class="search_box">
 								<button type="submit" style="display: contents">
-									<img class="search_img"
-										src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-										alt="" />
+									<img class="search_img" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="" />
 								</button>
-								<input class="search_input" type="text" name="keyword"
-									value="${keyword}" placeholder="검색어 입력...">
+								<input class="search_input" type="text" name="keyword" value="${keyword}" placeholder="검색어 입력...">
 							</div>
 						</form>
 					</div>
 				</div>
+				
 				<div class="top_user">
 					<a href="${pageContext.request.contextPath}/users/signup_form"
-						class="sign_up btn btn-outline-success">SIGN-UP</a> <a id="login"
-						href="javascript:" class="login btn btn-outline-dark">LOGIN</a>
+						class="sign_up btn btn-outline-success">SIGN-UP</a> 
+					<a id="login" href="javascript:" class="login btn btn-outline-dark">LOGIN</a>
 				</div>
 			</div>
 		</c:when>
+		
 		<c:when test="${sessionScope.id eq 'admin'}">
 			<a href="${pageContext.request.contextPath}/" class="logo_text">
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-				<div id="simple-list-example"
-					class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
-						id="category">CATEGORY</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
-						id="research">RESEARCH</a>
+				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">RESEARCH</a>
 				</div>
+				
 				<div class="search_menu">
 					<div class="search_bar">
-						<form action="${pageContext.request.contextPath}/search/search"
-							method="post">
+						<form action="${pageContext.request.contextPath}/search/search" method="post">
 							<div class="search_box">
 								<button type="submit" style="display: contents">
-									<img class="search_img"
-										src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-										alt="" />
+									<img class="search_img" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="" />
 								</button>
-								<input class="search_input" type="text" name="keyword"
-									value="${keyword}" placeholder="검색어 입력...">
+								<input class="search_input" type="text" name="keyword" value="${keyword}" placeholder="검색어 입력...">
 							</div>
 						</form>
 					</div>
 				</div>
+				
 				<div class="top_user">
-					<a href="${pageContext.request.contextPath}/users/info"
-						class="user_menu rainbow_effect user_menu badge">${sessionScope.id }</a>
-					<a id="logout" href="javascript:"
-						class="logout_menu btn btn-outline-danger"
-						style="padding-top: 0px;">LOGOUT</a>
+					<a href="${pageContext.request.contextPath}/users/info" class="user_menu rainbow_effect user_menu badge">${sessionScope.id }</a>
+					<a id="logout" href="javascript:" class="logout_menu btn btn-outline-danger" style="padding-top: 0px;">LOGOUT</a>
 				</div>
 			</div>
 		</c:when>
+		
 		<c:otherwise>
 			<a href="${pageContext.request.contextPath}/" class="logo_text">
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-				<div id="simple-list-example"
-					class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
-						id="category">CATEGORY</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
-						id="research">RESEARCH</a>
+				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">RESEARCH</a>
 				</div>
+				
 				<div class="search_menu">
 					<div class="search_bar">
-						<form action="${pageContext.request.contextPath}/search/search"
-							method="post">
+						<form action="${pageContext.request.contextPath}/search/search" method="post">
 							<div class="search_box">
 								<button type="submit" style="display: contents">
-									<img class="search_img"
-										src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-										alt="" />
+									<img class="search_img" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="" />
 								</button>
-								<input class="search_input" type="text" name="keyword"
-									value="${keyword}" placeholder="검색어 입력...">
+								<input class="search_input" type="text" name="keyword" value="${keyword}" placeholder="검색어 입력...">
 							</div>
 						</form>
 					</div>
 				</div>
+				
 				<div class="top_user">
-					<a href="${pageContext.request.contextPath}/users/info"
-						class="user_menu badge text-bg-primary">${sessionScope.id }</a> <a
-						id="logout" href="javascript:"
-						class="logout_menu btn btn-outline-danger"
-						style="padding-top: 0px;">LOGOUT</a>
+					<a href="${pageContext.request.contextPath}/users/info" class="user_menu badge text-bg-primary">${sessionScope.id }</a> 
+					<a id="logout" href="javascript:" class="logout_menu btn btn-outline-danger" style="padding-top: 0px;">LOGOUT</a>
 				</div>
 			</div>
 		</c:otherwise>
 	</c:choose>
 </div>
 
-
 <div class="chat_area">
 	<div class="chatTop">
-		<p style="padding-top: 2%; margin-left: 2%; color: white;"
-			id="chatTop">CHAT</p>
+		<p style="padding-top: 2%; margin-left: 2%; color: white;" id="chatTop">CHAT</p>
 		<svg id="min_process" xmlns="http://www.w3.org/2000/svg"
 			fill="currentColor" class="bi bi-arrow-down-left-square"
 			viewBox="0 0 16 16">
@@ -145,6 +122,7 @@
 				d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z" />
 		</svg>
 	</div>
+	
 	<div class="chat">
 		<div id="chat_box"></div>
 		<div class="msg_box">
@@ -198,7 +176,6 @@
 	
     //웹소켓을 연결
     const ws = new WebSocket('ws://34.125.190.255:8011/');
-	//const ws = new WebSocket('ws://localhost:8011/');
 	
 	//연결 성공 시에 실행되는 function
     ws.onopen = function() {
@@ -349,4 +326,4 @@
 			location.href= "${pageContext.request.contextPath}/users/logout?url="+url2;
 			});
 		}
-    </script>
+</script>

@@ -5,21 +5,22 @@ import java.util.List;
 import com.gura.acorn.shop.dto.ShopDto;
 
 public interface ShopDao {
-	   //글목록
+	   //음식점 목록
 	   public List<ShopDto> getList(ShopDto dto);
+	   //평점이 높은 음식점 리스트
 	   public List<ShopDto> getTopList(ShopDto dto);
-	   //글의 갯수
+	   //음식점의 갯수
 	   public int getCount(ShopDto dto);
-	   //글 추가
+	   //음식점 추가
 	   public void insert(ShopDto dto);
-	   //글 삭제
+	   //음식점 삭제
 	   public void delete(int num);
-	   //글 수정
+	   //음식점 수정
 	   public void update(ShopDto dto);
-	   //글정보 얻어오기
+	   //음식점 정보 얻어오기
 	   public ShopDto getData(int num);
-	   //키워드를 활용하여 글정보 얻어오기
+	   //키워드를 활용하여 음식점 정보 얻어오기
 	   public ShopDto getData(ShopDto dto);
-	   // 글 조회수 증가시키기
+	   //음식점 조회수 증가시키기
 	   public void addViewCount(int num);
 }

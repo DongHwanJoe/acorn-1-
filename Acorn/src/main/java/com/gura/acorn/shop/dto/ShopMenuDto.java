@@ -4,16 +4,16 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("shopMenuDto")
 public class ShopMenuDto {
-	   private int num;
-	   private int menuNum;
-	   private String name;
-	   private String price;
-	   private String content;
-	   private String imagePath;
-	   private int startRowNum;
-	   private int endRowNum;
-	   
-	   public ShopMenuDto() {}
+	private int num;
+	private int menuNum;
+	private String name;
+	private String price;
+	private String content;
+	private String imagePath;
+	private int startRowNum;
+	private int endRowNum;
+
+	public ShopMenuDto() {}
 
 	public ShopMenuDto(int num, int menuNum, String name, String price, String content, String imagePath,
 			int startRowNum, int endRowNum) {

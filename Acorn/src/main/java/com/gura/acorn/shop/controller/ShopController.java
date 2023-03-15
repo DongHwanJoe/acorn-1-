@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,8 +56,7 @@ public class ShopController {
 		return IOUtils.toByteArray(is);
 	}
 	
-	
-	@RequestMapping("search/review_list")
+	@RequestMapping("/search/review_list")
 	public String reviewList(HttpServletRequest request) {
 		service.getReviewList(request);
 		return "search/review_list";
@@ -75,23 +73,21 @@ public class ShopController {
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, HttpSession session) {
 		service.getTopList(request);
-		
 		return "index";
 	}
 	
+	//월별 PV, UV, 일일 PV, 총 PV 검색
 	@RequestMapping("/es/test")
 	@ResponseBody
 	public List<Map<String, Object>> test(){
 		String index = "testlog6";
 		String field = "date";
 		
-		
-		
 		try {
-			Map<String, Object> PVMonthCount = Esservice.aggregateByMonth();
+			Map<String, Object> PVMonthCount = Esservice.aggPVByMonth();
 			Map<String, Object> PVDayCount = Esservice.searchDayPV(index, field);
 			Map<String, Object> PVTotalCount = Esservice.getTotalPV();
-			Map<String, Object> PVMaxCount = Esservice.searchByDateRange3();
+			Map<String, Object> PVMaxCount = Esservice.getMaxPVStore();
 			
 			List<Map<String, Object>> resultList = new ArrayList<>();
 			resultList.add(PVMonthCount);
@@ -100,7 +96,6 @@ public class ShopController {
 			resultList.add(PVMaxCount);
 			
 			return resultList;
-//			return Esservice.searchPV(index);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,6 +103,7 @@ public class ShopController {
 		return null;
 	}
 	
+	//현재기준 1분전의 error로그를 검색
 	@RequestMapping("/es/test2")
 	@ResponseBody
 	public List<Map<String, Object>> test2(){
@@ -120,11 +116,12 @@ public class ShopController {
 		return null;
 	}
 	
+	//월별 UV를 검색
 	@RequestMapping("/es/test3")
 	@ResponseBody
 	public List<Map<String, Object>> test3(){
 		try {
-			Map<String, Object> UVMonthCount = Esservice.aggregateByMonthUV();
+			Map<String, Object> UVMonthCount = Esservice.aggrUVByMonth();
 			
 			List<Map<String, Object>> resultList = new ArrayList<>();
 			resultList.add(UVMonthCount);
@@ -141,7 +138,6 @@ public class ShopController {
 	public String index2(HttpServletRequest request) {
 		service.getTopList(request);
 		return "index";
-		
 	}
 	
 	@RequestMapping("/shop/list")
@@ -154,6 +150,8 @@ public class ShopController {
 	@GetMapping("/shop/insertform")
 	public String insertform(HttpSession session) {
 		String id = (String)session.getAttribute("id");
+		
+		//로그인 하지 않았다면 로그인 페이지로, 관리자가 아니라면 권한페이지로 이동
 		if(id == null) {
 			throw new loginException("needLogin");
 		}else if(!id.equals("admin")) {
@@ -187,10 +185,12 @@ public class ShopController {
 		return "shop/detail";
 	}
 	
-	//가게 정보 업데이트 (가게정보 수정 기능 구현 후 사용)
+	//가게 정보 업데이트
 	@GetMapping("/shop/updateform")
 	public String updateform(HttpServletRequest request, HttpSession session) {
 		String id = (String)session.getAttribute("id");
+		
+		//로그인 하지 않았다면 로그인 페이지로, 관리자가 아니라면 권한페이지로 이동
 		if(id == null) {
 			throw new loginException("needLogin");
 		}else if(!id.equals("admin")) {
@@ -209,6 +209,8 @@ public class ShopController {
 	@GetMapping("/shop/delete")
 	public String delete(int num, HttpServletRequest request, HttpSession session) {
 		String id = (String)session.getAttribute("id");
+		
+		//로그인 하지 않았다면 로그인 페이지로, 관리자가 아니라면 권한페이지로 이동
 		if(id == null) {
 			throw new loginException("needLogin");
 		}else if(!id.equals("admin")) {
@@ -261,6 +263,8 @@ public class ShopController {
 	@RequestMapping("/shop/menu_insertform")
 	public String menuinsertform(HttpSession session) {
 		String id = (String)session.getAttribute("id");
+		
+		//로그인 하지 않았다면 로그인 페이지로, 관리자가 아니라면 권한페이지로 이동
 		if(id == null) {
 			throw new loginException("needLogin");
 		}else if(!id.equals("admin")) {
@@ -274,14 +278,5 @@ public class ShopController {
 		dto.setNum(Integer.parseInt(request.getParameter("num")));
 		service.saveMenu(dto, request);		
 		return "shop/menu_insert";
-	}
-
-	
-	//테스트용 statistic 
-	@RequestMapping("/statistics/example_1")
-	public String ex1(HttpServletRequest request) {
-		service.getDetail(request);
-		service.menuGetList(request);
-		return "statistics/example_1";
 	}
 }
