@@ -29,7 +29,6 @@ body::-webkit-scrollbar-thumb {
 	background-color: #2f3542;
 	border-radius: 10px;
 }
-
 </style>
 </head>
 

@@ -32,6 +32,7 @@
 			<div id="simple-list-item-1" class="shop_board_top">
 				<img src="https://i.pinimg.com/736x/59/4f/22/594f229ad803a615c4dc1766829dd13c.jpg" alt="" />
 			</div>
+			
 			<div class="shop_board_body1">
 				<div class="shop_board_title">
 				<br />
@@ -49,8 +50,6 @@
 							</a>
 						</div>
 					</c:if>
-					
-
 				</div>
 	
 				<div class="shop_board_info">
@@ -85,64 +84,63 @@
 									<c:if test="${reviewCount lt 30 && grade lt 4}">
 										<span style="color:gray;">* 평점이 4.0 이상(리뷰 5개 이상)이면 별 마크가, 리뷰가 50개 이상이면 리뷰 마크가 표시됩니다</span>
 									</c:if>
-								
 								</td>
 							</tr>
-							
 						</tbody>
 					</table>
 				</div>
 			</div>
+			
 			<div class="shop_board_separator"></div>
+			
 			<div class="shop_board_body2">
-					<div class="shop_board_menu">				
+				<div class="shop_board_menu">				
 					<strong>메뉴</strong>
 					<c:if test="${sessionScope.id eq 'admin'}">
-						<a
-							href="${pageContext.request.contextPath}/shop/menu_insertform?num=${dto.num}"
-							class="menu_insert btn btn-outline-warning">+</a>
+						<a href="${pageContext.request.contextPath}/shop/menu_insertform?num=${dto.num}" class="menu_insert btn btn-outline-warning">+</a>
 					</c:if>
+					
 					<ul class="shop_board_menu_list">
-							<c:forEach var="tmp" items="${menuList }">
-								<li class="menu_item">
-									<div class="menu_name_price">
-										<img src="${pageContext.request.contextPath}${tmp.imagePath}" id="${tmp.menuNum }" class="gallery" height="50px" alt="small_image" hidden/>
-										<span class="menu_name" id="/shop/images/${tmp.imagePath}" data-image="${tmp.content}" >${tmp.name}</span>
-										<span class="menu_price">${tmp.price}</span>
-										
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-	
+						<c:forEach var="tmp" items="${menuList }">
+							<li class="menu_item">
+								<div class="menu_name_price">
+									<img src="${pageContext.request.contextPath}${tmp.imagePath}" id="${tmp.menuNum }" class="gallery" height="50px" alt="small_image" hidden/>
+									<span class="menu_name" id="/shop/images/${tmp.imagePath}" data-image="${tmp.content}" >${tmp.name}</span>
+									<span class="menu_price">${tmp.price}</span>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			
-				<script type="text/javascript">
-				    $(document).ready(function() {
-				        var xOffset = 10;
-				        var yOffset = 30;
-				        
-				        //마우스 오버시 preview 생성
-				        $(document).on("mouseover",".menu_name",function(e){
-				        	var image_data = $(this).data("image");
-				            var add_caption = (image_data != undefined) ? "<br/>" + "ℹ️" +image_data : "" ;
-				            $("body").append("<p id='preview'><img src='" + $(this).attr("id") + "' width='400px'/>"+ add_caption +"</p>");
-				            $("#preview")
-				            .css("position", "fixed")
-				            .css("top", "25%")
-				            .css("left","35%")
-				            .css("z-index", 5)
-				          	.css("border", "1px solid #cecece")
-				            .fadeIn("slow");
-				        });
-				        //마우스 아웃시 preview 제거
-				        $(document).on("mouseout",".menu_name",function(){
-				            $("#preview").remove();
-				        });
-				    });
-				</script>
+			<script type="text/javascript">
+			    $(document).ready(function() {
+			        var xOffset = 10;
+			        var yOffset = 30;
+			        
+			        //마우스 오버시 preview 생성
+			        $(document).on("mouseover",".menu_name",function(e){
+			        	var image_data = $(this).data("image");
+			            var add_caption = (image_data != undefined) ? "<br/>" + "ℹ️" +image_data : "" ;
+			            $("body").append("<p id='preview'><img src='" + $(this).attr("id") + "' width='400px'/>"+ add_caption +"</p>");
+			            $("#preview")
+			            .css("position", "fixed")
+			            .css("top", "25%")
+			            .css("left","35%")
+			            .css("z-index", 5)
+			          	.css("border", "1px solid #cecece")
+			            .fadeIn("slow");
+			        });
+			        //마우스 아웃시 preview 제거
+			        $(document).on("mouseout",".menu_name",function(){
+			            $("#preview").remove();
+			        });
+			    });
+			</script>
+			
 			<div class="shop_board_separator"></div>
+			
 			<div class="shop_board_body3">
 				<div class="shop_board_review">
 					<strong>리뷰</strong>
@@ -154,20 +152,20 @@
 										<c:when test="${grade eq 0}">
 											<td class="avg_score"><span style="color:gray; font-size:18px;">등록 된 리뷰가 없습니다</span></td>
 										</c:when>
+										
 										<c:otherwise>
 											<td class="avg_score">평점 : <span style="color : red;">${grade}</span>점</td>
 										</c:otherwise> 
 									</c:choose>
 									<div class="" style="width:250px;height:150px;float: right;position: absolute;right: 0%;" >
 								    	<div class="statistics" >
-								   		 		<canvas id="myChart" ref="acquisitions" style="display: block;box-sizing: border-box;height: 150px;width: 250px;padding: 10px;"></canvas>
+							   		 		<canvas id="myChart" ref="acquisitions" style="display: block;box-sizing: border-box;height: 150px;width: 250px;padding: 10px;"></canvas>
 								    	</div>
 								    	
 								    	<!-- 리뷰 별점 데이터 받아오기 -->
 								    	<c:forEach var="tmp" items="${testList}">
 								    		<li hidden>
 								    			<input value="${tmp.gCount}" class="score_count_${tmp.grade}"></input>
-								    		
 								    		</li>
 								    	</c:forEach>
 									</div>
@@ -198,90 +196,72 @@
 																					xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 																					fill="currentColor" class="bi bi-person-circle"
 																					viewBox="0 0 16 16">
-												                                <path
-																						d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-												                                <path fill-rule="evenodd"
-																						d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												                              </svg>
+													                                <path
+																							d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+													                                <path fill-rule="evenodd"
+																							d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+												                              	</svg>
 																			</c:if>
 																			<c:if test="${not empty tmp.profile }">
-																				<img class="profile-image"
-																					src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
+																				<img class="profile-image" src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
 																			</c:if>
 																		</div>
 																		<span class="col">${tmp.writer }</span>
 																		<span class="bg_bar"></span>
 																		<span style="font-weight: 100; font-size : 13px; color : gray;">${tmp.regdate }</span>
 																		<c:choose>
-																			<c:when
-																				test="${ (id ne null) and (tmp.writer eq id) }">
-																				<a data-num="${tmp.num }"
-																					class="update-link btn btn-warning"
-																					href="javascript:" style="font-size : 13px; padding:0 1px;">EDIT</a>
-																				<a data-num="${tmp.num }"
-																					class="delete-link btn btn-danger"
-																					href="javascript:"  style="font-size : 13px; padding:0 1px;">DELETE</a>
+																			<c:when test="${ (id ne null) and (tmp.writer eq id) }">
+																				<a data-num="${tmp.num }" class="update-link btn btn-warning" href="javascript:" style="font-size : 13px; padding:0 1px;">EDIT</a>
+																				<a data-num="${tmp.num }" class="delete-link btn btn-danger" href="javascript:"  style="font-size : 13px; padding:0 1px;">DELETE</a>
 																			</c:when>
 																			<c:when test="${id eq 'admin' }">
-																				<a data-num="${tmp.num }"
-																					class="delete-link btn btn-danger"
-																					href="javascript:">DELETE</a>
+																				<a data-num="${tmp.num }" class="delete-link btn btn-danger" href="javascript:">DELETE</a>
 																			</c:when>
 																		</c:choose>
-																			<div class="startRadio" style="pointer-events: none;">																			
-																				<c:forEach var="i" begin="0" end="9">
-																					<label class="startRadio__box" > 
-																					<input type="radio" name="grade_number" value=${i }
-																						${tmp.grade eq (i/2+0.5) ? 'class="point"' : ''} >
-																						<span class="startRadio__img"> <span
-																							class="blind">별 ${(i/2+0.5) }개</span>
+																		
+																		<div class="startRadio" style="pointer-events: none;">
+																			<c:forEach var="i" begin="0" end="9">
+																				<label class="startRadio__box"> 
+																				<input type="radio" name="grade_number" value=${i } ${tmp.grade eq (i/2+0.5) ? 'class="point"' : ''}>
+																					<span class="startRadio__img"> 
+																						<span class="blind">별 ${(i/2+0.5) }개</span>
 																					</span>
-																					</label>
-																				</c:forEach>
-																			</div>
+																				</label>
+																			</c:forEach>
+																		</div>
+																		
 																		<div class="comment_box" id="pre${tmp.num }">
-																			<input class="review_title_box" type="text"
-																				name="title" id="spt${tmp.num }" value="${tmp.title}"
-																				disabled />
-																			<textarea class="review_content_box"
-																			id="spc${tmp.num }" name="content" disabled>${tmp.content}</textarea>
+																			<input class="review_title_box" type="text" name="title" id="spt${tmp.num }" value="${tmp.title}" disabled />
+																			<textarea class="review_content_box" id="spc${tmp.num }" name="content" disabled>${tmp.content}</textarea>
 																		</div>
 	
 																		<!-- 수정폼 -->
 																		<c:if test="${tmp.writer eq id }">
-																			<form id="updateForm${tmp.num }"
-																				class="review-form update-form"
-																				action="review_update" method="post">
+																			<form id="updateForm${tmp.num }" class="review-form update-form" action="review_update" method="post">
 																				<input type="hidden" name="num" value="${tmp.num }" />
 																				<div class="startRadio">
 																					<c:forEach var="i" begin="0" end="9">
-																						<label class="startRadio__box" hidden> <input
-																							type="radio" name="grade_number" value=${i }
-																							${tmp.grade eq (i/2+0.5) ? 'checked' : '' }
-																							disabled> <span class="startRadio__img">
+																						<label class="startRadio__box" hidden> 
+																						<input type="radio" name="grade_number" value=${i } ${tmp.grade eq (i/2+0.5) ? 'checked' : '' } disabled> 
+																							<span class="startRadio__img">
 																								<span class="blind">별 ${(i/2+0.5) }개</span>
-																						</span>
+																							</span>
 																						</label>
 																					</c:forEach>
 																				</div>
 	
 																				<textarea name="content">${tmp.content }</textarea>
-																				<button type="submit" id="ur${tmp.num }"
-																					class=comment_edit_btn>수정</button>
+																				<button type="submit" id="ur${tmp.num }" class=comment_edit_btn>수정</button>
 																			</form>
 																		</c:if>
 																	</div>
-	
-																	
 																</dt>
 																<div class="col-2">
 																	<c:choose>
-																		<c:when
-																			test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
+																		<c:when test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
 																		</c:when>
 																		<c:otherwise>
-																			<img class="review_img"
-																				src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
+																			<img class="review_img" src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
 																		</c:otherwise>
 																	</c:choose>
 																</div>
@@ -289,7 +269,6 @@
 														</c:otherwise>
 													</c:choose>
 												</c:forEach>
-	
 											</ul>
 										</div>
 									</td>
@@ -300,23 +279,22 @@
 										<div class="comment_form_box">
 											<form class="review-form insert-form" action="review_insert" method="post">
 												<!-- 실제 폼에 제출되는 이미지 값 -->
-												<input type="hidden" name="imagePath" value="empty" /> <input
-													type="hidden" name="ref_group" value="${dto.num }" />
+												<input type="hidden" name="imagePath" value="empty" /> 
+												<input type="hidden" name="ref_group" value="${dto.num }" />
 													
 												<div class="startRadio" style="float: left; left: 0%;">
 													<c:forEach var="i" begin="0" end="9">
-														<label class="startRadio__box"> <input type="radio"
-															name="grade_number" value=${i }
-															${i eq 9 ? 'checked' : '' }
-															${i%2 eq 0  ? 'disabled' : ''} > 
-															<span
-															class="startRadio__img"> <span class="blind">별
-																	${(i/2+0.5) }개</span>
-														</span>
+														<label class="startRadio__box"> 
+														<input type="radio" name="grade_number" value=${i } ${i eq 9 ? 'checked' : '' } ${i%2 eq 0  ? 'disabled' : ''} > 
+															<span class="startRadio__img"> 
+																<span class="blind">별 ${(i/2+0.5) }개</span>
+															</span>
 														</label>
 													</c:forEach>
 												</div>
+												
 												<button class="regist_btn btn btn-outline-warning" type="submit">등록</button>
+												
 												<div class="text_box">
 													<textarea class="regist_comment_box" name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
 													
@@ -328,16 +306,13 @@
 													    </svg>
 													</a>
 												</div>
-												<input class="review_title_box" type="text" name="title" id="title"
-													placeholder="한줄평 입력..." />
-	
+												
+												<input class="review_title_box" type="text" name="title" id="title" placeholder="한줄평 입력..." />
 											</form>
+											
 											<!-- 리뷰 테이블에 이미지 업로드를 위한 폼 -->
-											<form id="imageForm"
-												action="${pageContext.request.contextPath}/shop/review_image_upload"
-												method="post" enctype="multipart/form-data">
-												사진 <input type="file" id="image" name="image"
-													accept=".jpg, .png, .gif, .jpeg" />
+											<form id="imageForm" action="${pageContext.request.contextPath}/shop/review_image_upload" method="post" enctype="multipart/form-data">
+												사진 <input type="file" id="image" name="image" accept=".jpg, .png, .gif, .jpeg" />
 												<button type="submit">업로드</button>
 											</form>
 										</div> 
@@ -345,26 +320,24 @@
 								</tr>
 							</tbody>
 						</table>
+						
 						<nav>
 							<ul class="pagination" style="margin:5% 4% 0 0;">
-								
 								<c:if test="${rvStartPageNum ne 1 }">
-									<li class="page-item" style="border-top:none"><a class="page-link"
-										href="detail?num=${dto.num}&rvPageNum=${rvStartPageNum - 1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
+									<li class="page-item" style="border-top:none">
+										<a class="page-link" href="detail?num=${dto.num}&rvPageNum=${rvStartPageNum - 1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
 									</li>
 								</c:if>
 								
-								<c:forEach var="i" begin="${rvStartPageNum }"
-									end="${rvEndPageNum }">
+								<c:forEach var="i" begin="${rvStartPageNum }" end="${rvEndPageNum }">
 									<li class="page-item ${rvPageNum eq i ? 'active' : '' }" style="border-top:none">
-										<a class="page-link"
-										href="detail?num=${dto.num }&rvPageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
+										<a class="page-link" href="detail?num=${dto.num }&rvPageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
 									</li>
 								</c:forEach>
 							
 								<c:if test="${rvEndPageNum lt rvTotalPageCount }">
-									<li class="page-item" style="border-top:none"><a class="page-link"
-										href="detail?num=${dto.num }&rvPageNum=${rvEndPageNum + 1 }&condition=${condition}&keyword=${encodedK}">Next</a>
+									<li class="page-item" style="border-top:none">
+										<a class="page-link" href="detail?num=${dto.num }&rvPageNum=${rvEndPageNum + 1 }&condition=${condition}&keyword=${encodedK}">Next</a>
 									</li>
 								</c:if>
 							</ul>
@@ -375,121 +348,115 @@
 		</div>
 	</div>
 	
-	
-
-		
-
-	
-<script>
-const app = Vue.createApp({
-	setup() {
-		const arr = Vue.ref([0, 0, 0, 0, 0]); // arr를 ref로 만들어서 반응성을 추가
-		const chartData = Vue.reactive({
-				labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
-				datasets: [{
-					label: "리뷰 별점 수",
-					axis: 'y',
-					barThickness: 10,
-					backgroundColor: "rgba(255, 99, 132, 0.2)",
-					borderColor: "rgba(255,99,132,1)",
-					borderWidth: 1,
-					data: arr.value, // arr의 값을 참조
-				},
-				],
-			});
-			// window.onload 대신에 Vue.watchEffect를 사용
-			// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
-			Vue.watchEffect(() => {
-				arr.value = [0, 0, 0, 0, 0]; // 초기화
-				console.log(arr.value[0]);
-				for (let i=1; i < 6; i++) {
-					if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
-						
-					}
-					else{
-						arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
-					}
-					
-			  	}
-				chartData.datasets[0].data = arr.value; // 데이터 갱신
-			});
-	
-			return {
-		    	chartData,
-			};
-	},
-	async mounted() {
-		const response = await fetch('http://localhost:9000/es/test', {
-			method : 'GET',
-			headers : {
-				'Content-Type' : 'application/json',
-			}
-		});
-		
-		const ctx = document.getElementById("myChart").getContext("2d");
-		const myChart = new Chart(ctx, {
-			type: "bar",
-			data: this.chartData,
-			plugins : [ChartDataLabels],
-			options: {
-				plugins: {
-					legend: {
-						display: false
+	<script>
+		const app = Vue.createApp({
+			setup() {
+				const arr = Vue.ref([0, 0, 0, 0, 0]); // arr를 ref로 만들어서 반응성을 추가
+				const chartData = Vue.reactive({
+						labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
+						datasets: [{
+							label: "리뷰 별점 수",
+							axis: 'y',
+							barThickness: 10,
+							backgroundColor: "rgba(255, 99, 132, 0.2)",
+							borderColor: "rgba(255,99,132,1)",
+							borderWidth: 1,
+							data: arr.value, // arr의 값을 참조
 						},
-					datalabels: {
-			            font: {
-			              size: 12,
-			            },
-			            display: function(context) {
-			                return context.dataset.data[context.dataIndex]>1;
-			              },
-			            anchor: 'end',
-			            align: 'right',
-			            offset: 2,
-			            formatter: function(value, context) {
-			              return value;
-			            }
-					}
-				},
-				indexAxis: 'y',
-				scales: {
-					x:{
-				        ticks: {
-				        	display: false,
-				        	stepSize: 1,
-				        },
-			            grid: {display: false},
-					},
-					y: {
-						beginAtZero: true, // y축이 0부터 시작하도록 설정
-						offset: true,
-						grid: {
-						    display: false
-					  	},
-					    ticks: {
-					        color: '#ffc107',
-					    	stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
-					    },
-					},
-				},
-				layout: {
-					padding: {
-						top: 0,
-						bottom: 0,
-						left: 0,
-						right: 20
-					},
-				},
+						],
+					});
+					// window.onload 대신에 Vue.watchEffect를 사용
+					// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
+					Vue.watchEffect(() => {
+						arr.value = [0, 0, 0, 0, 0]; // 초기화
+						console.log(arr.value[0]);
+						for (let i=1; i < 6; i++) {
+							if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
+								
+							}
+							else{
+								arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
+							}
+							
+					  	}
+						chartData.datasets[0].data = arr.value; // 데이터 갱신
+					});
+			
+					return {
+				    	chartData,
+					};
 			},
+			async mounted() {
+				const response = await fetch('http://localhost:9000/es/test', {
+					method : 'GET',
+					headers : {
+						'Content-Type' : 'application/json',
+					}
+				});
+				
+				const ctx = document.getElementById("myChart").getContext("2d");
+				const myChart = new Chart(ctx, {
+					type: "bar",
+					data: this.chartData,
+					plugins : [ChartDataLabels],
+					options: {
+						plugins: {
+							legend: {
+								display: false
+								},
+							datalabels: {
+					            font: {
+					              size: 12,
+					            },
+					            display: function(context) {
+					                return context.dataset.data[context.dataIndex]>1;
+					              },
+					            anchor: 'end',
+					            align: 'right',
+					            offset: 2,
+					            formatter: function(value, context) {
+					              return value;
+					            }
+							}
+						},
+						indexAxis: 'y',
+						scales: {
+							x:{
+						        ticks: {
+						        	display: false,
+						        	stepSize: 1,
+						        },
+					            grid: {display: false},
+							},
+							y: {
+								beginAtZero: true, // y축이 0부터 시작하도록 설정
+								offset: true,
+								grid: {
+								    display: false
+							  	},
+							    ticks: {
+							        color: '#ffc107',
+							    	stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
+							    },
+							},
+						},
+						layout: {
+							padding: {
+								top: 0,
+								bottom: 0,
+								left: 0,
+								right: 20
+							},
+						},
+					},
+				});
+				window.addEventListener('resize', function() {
+					myChart.resize();
+				});
+			  },
 		});
-		window.addEventListener('resize', function() {
-			myChart.resize();
-		});
-	  },
-});
-app.mount(".statistics");
-</script>
-
+		app.mount(".statistics");
+	</script>
 
 	<script>
 		let selector = document.getElementsByClassName("menu_price");
@@ -498,11 +465,8 @@ app.mount(".statistics");
 		}
 	</script>
 
-	
 	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-	
 
-	
 	<!-- 리뷰 관리 script -->
 	<script>
       document.querySelector(".insert-form")
@@ -553,6 +517,7 @@ app.mount(".statistics");
             });
          }
       }
+      
       function addDeleteListener(sel){
          let deleteLinks=document.querySelectorAll(sel);
          for(let i=0; i<deleteLinks.length; i++){

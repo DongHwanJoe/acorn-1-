@@ -22,7 +22,8 @@
 		<jsp:param value="index" name="thisPage"/>
 	</jsp:include>
 	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-    <div id="simple-list-item-1" class="block_content_top"></div>
+    	<div id="simple-list-item-1" class="block_content_top"></div>
+		
 		<div class="roll_screen">
 			<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner">
@@ -36,13 +37,13 @@
 						<img src="https://www.teahub.io/photos/full/280-2809437_best-guitars-for-metal-rock-guitar.jpg" class="d-block w-100" alt="...">
 					</div>
 				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+				
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+				
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
@@ -51,54 +52,38 @@
 
 		<div id="simple-list-item-2" class="category">
 			<div class="row">
-				<a href="${pageContext.request.contextPath}/shop/list"> <img
-					src="${pageContext.request.contextPath}/resources/images/category/all.jpg"
-					alt="전체" title="전체" class="col" />
-	
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=한식">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/hansik.jpg"
-					alt="한식" title="한식" class="col" />
-	
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=중식">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/jungsik.jpg"
-					alt="중식" title="중식" class="col" />
-	
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=일식">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/ilsik.jpg"
-					alt="일식" title="일식" class="col" />
+				<a href="${pageContext.request.contextPath}/shop/list"> 
+					<img src="${pageContext.request.contextPath}/resources/images/category/all.jpg" alt="전체" title="전체" class="col" />
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=한식">
+					<img src="${pageContext.request.contextPath}/resources/images/category/hansik.jpg" alt="한식" title="한식" class="col" />
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=중식">
+					<img src="${pageContext.request.contextPath}/resources/images/category/jungsik.jpg" alt="중식" title="중식" class="col" /> 
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=일식">
+					<img src="${pageContext.request.contextPath}/resources/images/category/ilsik.jpg" alt="일식" title="일식" class="col" />
 				</a>
 			</div>
+			
 			<div class="row">
 				<a href="${pageContext.request.contextPath}/shop/list?category=분식">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/bunsik.jpg"
-					alt="분식" title="분식" class="col" />
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=양식">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/yangsik.jpg"
-					alt="양식" title="양식" class="col" />
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=패스트푸드">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/fastfood.jpg"
-					alt="패스트푸드" title="패스트푸드" class="col" />
-	
-				</a> <a
-					href="${pageContext.request.contextPath}/shop/list?category=기타">
-					<img
-					src="${pageContext.request.contextPath}/resources/images/category/guitar.jpg"
-					alt="기타" title="기타" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/bunsik.jpg" alt="분식" title="분식" class="col" />
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=양식">
+					<img src="${pageContext.request.contextPath}/resources/images/category/yangsik.jpg" alt="양식" title="양식" class="col" />
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=패스트푸드">
+					<img src="${pageContext.request.contextPath}/resources/images/category/fastfood.jpg" alt="패스트푸드" title="패스트푸드" class="col" />
+				</a> 
+				<a href="${pageContext.request.contextPath}/shop/list?category=기타">
+					<img src="${pageContext.request.contextPath}/resources/images/category/guitar.jpg" alt="기타" title="기타" class="col" />
 				</a>
 			</div>
 		</div>
+		
 		<div class="block_content"></div>
+		
 		<div id="simple-list-item-3" class="hot_place">
 			<p style="  -webkit-user-select:none;
 						  -moz-user-select:none;
@@ -107,30 +92,37 @@
 			<br />
 			<span>2월 방문자, 평점 </span><strong>TOP 10 !</strong>
 			</p>
-			
 		</div>
+
 		<div class="roll_screen_store row">
 			<div class="slide slick-slider roller_store">
 				<c:forEach var="tmp" items="${list }">
-						<a href="${pageContext.request.contextPath}/shop/detail?num=${tmp.num}&keyword=${keyword}" style="margin-right : 20px; background-color:white; height:367px; border-radius:10px; overflow:hidden;">
-		   					<span class="shop_item_img">
-		   						<img src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" alt="...">
-		   					</span>
-			   				<div class="shop_item_content">
-			   					<span style="font-weight: bold; color: red; font-size: 20px;">${tmp.grade }</span>
-			   					<div class="shop_title">${tmp.title}</div>
-			   					<ul>
-			   						<li class="shop_item_content_detail"><img src="${pageContext.request.contextPath}/resources/images/shop_info/address.png" alt="주소" class="shop_info_icon" title="주소"/>${tmp.addr }</li>
-			   						<li class="shop_item_content_detail">${tmp.content }</li>
-			   						<li class="shop_item_content_detail">${tmp.categorie}, ${tmp.startTime}~ ${tmp.endTime}, ${tmp.telNum}</li>
-			   						<li class="shop_item_content_detail">👀 페이지 뷰 : <b style="color:black;">${tmp.viewCount }</b>, ✏️ 리뷰 : <b style="color:black;">${tmp.rCount}</b></li>
-			   					</ul>
-			   				</div>	 
-						</a>
+					<a href="${pageContext.request.contextPath}/shop/detail?num=${tmp.num}&keyword=${keyword}" style="margin-right: 20px; background-color: white; height: 367px; border-radius: 10px; overflow: hidden;">
+						<span class="shop_item_img"> 
+						<img src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" alt="...">
+						</span>
+						<div class="shop_item_content">
+							<span style="font-weight: bold; color: red; font-size: 20px;">${tmp.grade }</span>
+							<div class="shop_title">${tmp.title}</div>
+							<ul>
+								<li class="shop_item_content_detail">
+									<img src="${pageContext.request.contextPath}/resources/images/shop_info/address.png" alt="주소" class="shop_info_icon" title="주소" />${tmp.addr }
+								</li>
+								<li class="shop_item_content_detail">${tmp.content }</li>
+								<li class="shop_item_content_detail">${tmp.categorie},
+									${tmp.startTime}~ ${tmp.endTime}, ${tmp.telNum}</li>
+								<li class="shop_item_content_detail">👀 페이지 뷰 : <b
+									style="color: black;">${tmp.viewCount }</b>, ✏️ 리뷰 : <b
+									style="color: black;">${tmp.rCount}</b></li>
+							</ul>
+						</div>
+					</a>
 				</c:forEach>
 			</div>
-		<div class="block_content"></div>
+			
+			<div class="block_content"></div>
 		</div>
+		
 		<script>
 			$('.slide.roller_store').slick({
 				  infinite: true,
@@ -145,6 +137,7 @@
 				  draggable : false,
 				});
 		</script>
+		
 		<div id="simple-list-item-4" class="statistics">
 			<p style="z-index : 3;
 			  -webkit-user-select:none;
@@ -168,15 +161,16 @@
 			    justify-content: center;
 			    margin: auto;">지금 보러가기</a>
 			</p>
+			
 			<div class="statistics_bg1" id="st_img">
 				<img src="${pageContext.request.contextPath}/resources/images/pie_chart.svg" alt="" />
 			</div>
+			
 			<div class="statistics_bg2" id="st_img">
 				<img src="${pageContext.request.contextPath}/resources/images/chart_img.jpg" alt="" />
 			</div>
 		</div>
 	</div>     
-
 
 </body>
 </html>

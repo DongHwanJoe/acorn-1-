@@ -153,84 +153,83 @@ p{
 	</jsp:include>
 	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
 		<div id="simple-list-item-1"></div>
-	
 		
 		<div class="container">
 			<div class="total_search_result">
 				<b style="font-weight: bold">
-						<span class="keyword_style">"${keyword}"</span>에 대해  검색 결과
-						총 
-						<p class="result_style">${totalRow+rvtotalRow}</p>
-						건이 검색 되었습니다.
+					<span class="keyword_style">"${keyword}"</span>에 대해  검색 결과
+					총 
+					<p class="result_style">${totalRow+rvtotalRow}</p>
+					건이 검색 되었습니다.
 				</b>
 			</div>
+			
 			<div class="shop_search_result">
 				<div class="result_header">
 					<c:choose>
 						<c:when test="${totalRow gt 5}">
-							<a class="more_info"
-								href="${pageContext.request.contextPath}/shop/list?keyword=${keyword}">더보기 > </a>
+							<a class="more_info" href="${pageContext.request.contextPath}/shop/list?keyword=${keyword}">더보기 > </a>
 						</c:when>
 					</c:choose>
 					<p class="result_title">가게 목록 (${totalRow}건)</p>				
 				</div>
+				
 				<div class="result_content">
-							<c:if test="${totalRow eq 0}">
-								<div class="result_zero">
-									<span >"${keyword}"로 검색한 결과가 없습니다.</span>
+					<c:if test="${totalRow eq 0}">
+						<div class="result_zero">
+							<span>"${keyword}"로 검색한 결과가 없습니다.</span>
+						</div>
+					</c:if>
+					
+					<c:forEach var="tmp" items="${list }">
+						<ul class="result_item">
+							<li class="content_head">
+								<span class="cat_style">${tmp.categorie }</span>
+								<span class="tit_style" style="margin-left: 5px;"> 
+									<a href="detail?num=${tmp.num }&condition=${condition}&keyword=${encodedK}">${tmp.title }</a>
+								</span>
+								
+								<div class="shop_link">
+									<a class="review_list_store_name" href="${pageContext.request.contextPath}/shop/detail?num=${tmp.num}" style="position: absolute; top: 3px;"> 
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16">
+											<path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z" />
+										</svg>
+									</a>
 								</div>
-							</c:if>
-							<c:forEach var="tmp" items="${list }">
-							<ul class="result_item">
-								<li class="content_head">
-									<span class="cat_style">${tmp.categorie }</span>
-									<span class="tit_style" style="margin-left : 5px;">
-										<a href="detail?num=${tmp.num }&condition=${condition}&keyword=${encodedK}">${tmp.title }</a>
-									</span>
-									<div class="shop_link">
-										<a class="review_list_store_name" href="${pageContext.request.contextPath}/shop/detail?num=${tmp.num}" style="position:absolute; top: 3px;">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16">
-												<path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z"/>
-											</svg>
-										</a>
-									</div>
-								</li>
-								<li class="content_mid">
-									<span class="con_style">${tmp.content}</span>
-								</li>
-								<li class="content_info">
-									<span class="info_style">평점 </span>${tmp.grade }점
-									<span class="info_style">리뷰 </span>${tmp.rCount }개
-									<span class="info_style">페이지뷰 </span>${tmp.viewCount}회
-								</li>
+							</li>
 							
-							</ul>
-							</c:forEach>
+							<li class="content_mid">
+								<span class="con_style">${tmp.content}</span>
+							</li>
+							
+							<li class="content_info">
+								<span class="info_style">평점 </span>${tmp.grade }점 
+								<span class="info_style">리뷰 </span>${tmp.rCount }개
+								<span class="info_style">페이지뷰 </span>${tmp.viewCount}회
+							</li>
+						</ul>
+					</c:forEach>
 				</div>
 				
 				<script type="text/javascript">
-				$(document).ready(function () {
-				    var search = '${keyword}';
-				    console.log("search : "+search);
-				    $(".review_content_box:contains('"+search+"')").each(function () {
-				        var regex = new RegExp(search,'gi');
-				        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
-				    });
-				    $(".tit_style:contains('"+search+"')").each(function () {
-				        var regex = new RegExp(search,'gi');
-				        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
-				    });
-				    $(".keyword_style:contains('"+search+"')").each(function () {
-				        var regex = new RegExp(search,'gi');
-				        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
-				    });
-				});
-				
+					$(document).ready(function () {
+					    var search = '${keyword}';
+					    console.log("search : "+search);
+					    $(".review_content_box:contains('"+search+"')").each(function () {
+					        var regex = new RegExp(search,'gi');
+					        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
+					    });
+					    $(".tit_style:contains('"+search+"')").each(function () {
+					        var regex = new RegExp(search,'gi');
+					        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
+					    });
+					    $(".keyword_style:contains('"+search+"')").each(function () {
+					        var regex = new RegExp(search,'gi');
+					        $(this).html( $(this).text().replace(regex, "<span class='txt-hlight'>"+search+"</span>") );
+					    });
+					});
 				</script>
-				
-			</div>		
-
-
+			</div>
 
 			<div class="review_search_result">
 				<div class="result_header" style="border-bottom: 3px solid blue;">
@@ -241,96 +240,94 @@ p{
 					</c:choose>
 					<p class="result_title">리뷰 목록(${rvtotalRow}건)</p>
 				</div>
-			<div class="review_list">
-				<div class="reviews">
-					<ul>
-						<c:forEach var="tmp" items="${rvlist }">
-							<c:choose>
-								<c:when test="${tmp.deleted eq 'yes' }">
-									<dt class="row">
-										<li>삭제된 리뷰 입니다.</li>
-									</dt>
-								</c:when>
-								<c:otherwise>
-									<c:if test="${tmp.num eq tmp.review_group }">
-										<li id="reli${tmp.num }">
-									</c:if>
-	
-									<dl style="border-bottom:1px solid #cecece; margin-bottom : 0;">
-										<dt class="row" style="padding: 5px;">
-											<div class="comment_box">
-												<!-- 유저 프로필 -->
-												<div class="review_profile col">
-													<c:if test="${ empty tmp.profile }">
-														<svg class="profile-image"
-															xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-															fill="currentColor" class="bi bi-person-circle"
-															viewBox="0 0 16 16">
-						                                <path
-																d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-						                                <path fill-rule="evenodd"
-																d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-						                              </svg>
-													</c:if>
-													<c:if test="${not empty tmp.profile }">
-														<img class="profile-image"
-															src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
-													</c:if>
-												</div>
-												<span class="col">${tmp.writer }</span> <span class="bg_bar"></span>
-												<span style="font-weight: 100; font-size: 13px; color: gray;">${tmp.regdate }</span>
-												<div class="shop_link">
-													<a class="review_list_store_name" href="${pageContext.request.contextPath}/shop/detail?num=${tmp.ref_group}">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16">
-															<path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z"/>
-														</svg>
-														<span style="font-size:13px;">${tmp.title }</span>
-													</a>
-												</div>
-													
-												
-												<div class="startRadio" style="pointer-events: none;">
-													<c:forEach var="i" begin="0" end="9">
-														<label class="startRadio__box"> <input type="radio"
-															name="grade_number" value=${i }
-															${tmp.grade eq (i/2+0.5) ? 'class="point"' : '' }>
-															<span class="startRadio__img"> <span class="blind">별
-																	${(i/2+0.5) }개</span>
-														</span>
-														</label>
-													</c:forEach>
-												</div>
-												<span class="review_content_box" id="spc${tmp.num }"
-													name="content" style="display: block;">
-													${tmp.content}</span>
-												<div class="comment_box" id="pre${tmp.num }">
-													<input class="review_title_box" type="text" name="title"
-														id="spt${tmp.num }" value="${tmp.title}" disabled />
-												</div>
-												
-												
-											</div>
-	
-	
+				
+				<div class="review_list">
+					<div class="reviews">
+						<ul>
+							<c:forEach var="tmp" items="${rvlist }">
+								<c:choose>
+									<c:when test="${tmp.deleted eq 'yes' }">
+										<dt class="row">
+											<li>삭제된 리뷰 입니다.</li>
 										</dt>
-										<div class="col-2">
-											<c:choose>
-												<c:when
-													test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
-												</c:when>
-												<c:otherwise>
-													<img class="review_img"
-														src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</dl>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</ul>
+									</c:when>
+									
+									<c:otherwise>
+										<c:if test="${tmp.num eq tmp.review_group }">
+											<li id="reli${tmp.num }">
+										</c:if>
+
+										<dl style="border-bottom: 1px solid #cecece; margin-bottom: 0;">
+											<dt class="row" style="padding: 5px;">
+												<div class="comment_box">
+													<!-- 유저 프로필 -->
+													<div class="review_profile col">
+														<c:if test="${ empty tmp.profile }">
+															<svg class="profile-image"
+																xmlns="http://www.w3.org/2000/svg" width="16"
+																height="16" fill="currentColor"
+																class="bi bi-person-circle" viewBox="0 0 16 16">
+								                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+								                                <path fill-rule="evenodd"
+																			d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+						                              		</svg>
+														</c:if>
+														
+														<c:if test="${not empty tmp.profile }">
+															<img class="profile-image" src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
+														</c:if>
+													</div>
+													<span class="col">${tmp.writer }</span> 
+													<span class="bg_bar"></span> 
+													<span style="font-weight: 100; font-size: 13px; color: gray;">${tmp.regdate }</span>
+													
+													<div class="shop_link">
+														<a class="review_list_store_name" href="${pageContext.request.contextPath}/shop/detail?num=${tmp.ref_group}">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16"
+																height="16" fill="currentColor"
+																class="bi bi-shop-window" viewBox="0 0 16 16">
+																<path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z" />
+															</svg> 
+														<span style="font-size: 13px;">${tmp.title }</span>
+														</a>
+													</div>
+
+													<div class="startRadio" style="pointer-events: none;">
+														<c:forEach var="i" begin="0" end="9">
+															<label class="startRadio__box"> 
+															<input type="radio" name="grade_number" value=${i } ${tmp.grade eq (i/2+0.5) ? 'class="point"' : '' }>
+																<span class="startRadio__img"> 
+																	<span class="blind">별 ${(i/2+0.5) }개</span>
+																</span>
+															</label>
+														</c:forEach>
+													</div>
+													
+													<span class="review_content_box" id="spc${tmp.num }" name="content" style="display: block;"> ${tmp.content}</span>
+													
+													<div class="comment_box" id="pre${tmp.num }">
+														<input class="review_title_box" type="text" name="title" id="spt${tmp.num }" value="${tmp.title}" disabled />
+													</div>
+												</div>
+											</dt>
+											
+											<div class="col-2">
+												<c:choose>
+													<c:when test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
+													</c:when>
+													<c:otherwise>
+														<img class="review_img" src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</dl>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 	</div>
 </body>

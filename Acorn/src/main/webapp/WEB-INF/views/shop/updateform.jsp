@@ -18,12 +18,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/index.css">
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/shop_insert_form.css">
-
-<!-- 가게정보 수정 기능 구현 시 사용 -->
-
-
-
-
 <style>
 textarea {
 	width: 768px;
@@ -50,30 +44,27 @@ button {
 	<jsp:include page="../../views/include/navbar.jsp">
 		<jsp:param value="admin03" name="thisPage" />
 	</jsp:include>
-	<div data-bs-spy="scroll" data-bs-target="#simple-list-example"
-		data-bs-offset="0" data-bs-smooth-scroll="true"
-		class="scrollspy-example" tabindex="0">
+	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
 		<div id="simple-list-item-1" class="container">
 			<h1>UPDATE STORE</h1>
-			<form action="${pageContext.request.contextPath}/shop/update"
-				method="Get" id="updateForm">
+			<form action="${pageContext.request.contextPath}/shop/update" method="Get" id="updateForm">
 				<!-- 숨겨진 imageform을 통해 등록된 이미지를 폼에 제출할 수 있도록 하는 hidden input -->
-				<input type="hidden" name="imagePath"
-					value="${ empty dto.imagePath ? 'empty' : dto.imagePath }" /> <input
-					type="hidden" name="num" value="${dto.num }" /> <br />
+				<input type="hidden" name="imagePath" value="${ empty dto.imagePath ? 'empty' : dto.imagePath }" /> 
+				<input type="hidden" name="num" value="${dto.num }" /> 
+				<br />
+				
 				<!-- 점포명 input -->
 				<div class="row">
 					<div class="col-4">
 						<label class="form-label" for="title">NAME</label>
 					</div>
 					<div class="col-8">
-						<input class="form-control" type="text" name="title" id="title"
-							value="${dto.title }" />
+						<input class="form-control" type="text" name="title" id="title" value="${dto.title }" />
 					</div>
 				</div>
-				<!-- 카테고리 input -->
-
 				<br />
+				
+				<!-- 카테고리 input -->
 				<div class="row">
 					<div class="col-4" style="text-align: right;">
 						<label class="form-label" for="categorie">CATEGORIES</label>
@@ -100,14 +91,14 @@ button {
 					</div>
 				</div>
 				<br />
+				
 				<!-- 번호 input -->
 				<div class="row">
 					<div class="col-4">
 						<label class="form-label" for="telNum">TEL NO.</label>
 					</div>
 					<div class="col-8">
-						<input class="form-control" type="text" name="telNum" id="telNum"
-							value="${dto.telNum }" />
+						<input class="form-control" type="text" name="telNum" id="telNum" value="${dto.telNum }" />
 					</div>
 				</div>
 				<br />
@@ -118,8 +109,7 @@ button {
 						<label class="form-label" for="addr">ADDRESS</label>
 					</div>
 					<div class="col-8">
-						<input class="form-control" type="text" name="addr" id="addr"
-							value='${dto.addr }' />
+						<input class="form-control" type="text" name="addr" id="addr" value='${dto.addr }' />
 					</div>
 				</div>
 				<br />
@@ -130,67 +120,63 @@ button {
 						<label class="form-label" for="startTime">OPEN</label>
 					</div>
 					<div class="col-8">
-						<input class="form-control" type="time" name="startTime"
-							id="startTime" value="${dto.startTime }" />
+						<input class="form-control" type="time" name="startTime" id="startTime" value="${dto.startTime }" />
 					</div>
 				</div>
 				<br />
+				
 				<div class="row">
 					<div class="col-4">
 						<label class="form-label" for="endTime">CLOSE</label>
 					</div>
 					<div class="col-8">
-						<input class="form-control" type="time" name="endTime"
-							id="endTime" value="${dto.endTime }" />
+						<input class="form-control" type="time" name="endTime" id="endTime" value="${dto.endTime }" />
 					</div>
 				</div>
 				<br />
+				
 				<!-- 설명 입력 textbox -->
 				<div class="row">
 					<!-- 가게 섬네일 등록을 위해 클릭하게 될 이미지 -->
 					<div class="col-4">
-						<label class="form-label" for="content"
-							style="inline-size: -webkit-fill-available;">EXPAIN</label> <a
-							id="profileLink" href="javascript:"> <c:choose>
+						<label class="form-label" for="content" style="inline-size: -webkit-fill-available;">EXPAIN</label> 
+						<a id="profileLink" href="javascript:"> 
+							<c:choose>
 								<c:when test="${ empty dto.imagePath }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-person-circle"
 										viewBox="0 0 16 16">
-		                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-		                 <path fill-rule="evenodd"
-											d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-		               </svg>
+					                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+					                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+			               			</svg>
 								</c:when>
+								
 								<c:otherwise>
-									<img id="profileImage"
-										src="${pageContext.request.contextPath }/shop/images/${ dto.imagePath}">
+									<img id="profileImage" src="${pageContext.request.contextPath }/shop/images/${ dto.imagePath}">
 								</c:otherwise>
 							</c:choose>
 						</a>
 					</div>
+					
 					<div class="col-8">
 						<textarea class="form-control" name="content" id="content">${dto.content }</textarea>
 					</div>
 				</div>
 				<br />
+				
 				<button class="btn btn-outline-success" type="submit">REGIST</button>
-
 			</form>
 
-			<form id="imageForm"
-				action="${pageContext.request.contextPath}/shop/image_upload"
-				method="post" enctype="multipart/form-data">
-				프로필 사진 <input type="file" id="image" name="image"
-					accept=".jpg, .png, .gif, .jpeg" />
+			<form id="imageForm" action="${pageContext.request.contextPath}/shop/image_upload" method="post" enctype="multipart/form-data">
+				프로필 사진 
+				<input type="file" id="image" name="image" accept=".jpg, .png, .gif, .jpeg" />
 				<button type="submit">업로드</button>
 			</form>
 		</div>
 	</div>
 
-	<script
-		src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 	<script>
 		isImageValid = false;
