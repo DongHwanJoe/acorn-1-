@@ -622,4 +622,5 @@ public class ShopServiceImpl implements ShopService{
 
 		request.setAttribute("testList", list);
 	}
+
 }

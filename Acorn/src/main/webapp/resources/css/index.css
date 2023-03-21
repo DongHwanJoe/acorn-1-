@@ -28,12 +28,37 @@ body {
 .roll_screen{
 	width : 100%;
 	height : 450px;
-	background-color : #FFFF5A;
 }
 .carousel-item>img{
-	object-fit: none;
+	object-fit: cover;
     overflow: hidden;
     height: 450px;
+}
+.banner_wrapper{
+    position: absolute;
+    width: 30%;
+    height: 70%;
+    background-color: white;
+    opacity: 0.9;
+    top : 15%;
+    
+}
+.banner_title{
+	position: absolute;
+    top: 20%;
+    left : 10%;
+    display: flex;
+    margin: auto;
+    font-size : 40px;
+    font-weight : bold;
+}
+
+.banner_body{
+	position: absolute;
+    right : 5%;
+    bottom : 8%;
+    display: flex;
+    margin: auto;
 }
 /* top menu */
 .logo{
@@ -41,14 +66,22 @@ body {
 	margin:5px;
 }
 .logo_text{
-	margin-left : 50px;
-	width:300px;
-	HEIGHT: 50PX;
-	display: flex; 
-	position: fixed;
-	text-decoration : none;
-	font-size : 30px;
-	font-weight : bold;
+	z-index : 5;
+	width: 300px;
+    height: 50px;
+    display: flex;
+    position: relative;
+    place-content: center;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    margin: auto;
+    float : left
+}
+@media screen and (max-width: 500px) {
+  .logo_text {
+    float: none;
+  }
 }
 .top_menu{
 	width : 67%;
@@ -63,6 +96,12 @@ body {
 .top_user{
 	position : absolute;
 	right : 0%;
+}
+@media screen and (max-width: 600px) {
+  .top_user{
+    display : none;
+    width : 40%;
+  }
 }
 .top_menu>.top_user>a{
 	text-decoration : none;
@@ -95,61 +134,10 @@ body {
 	text-decoration : none;
 	margin-right : 20px;
 }
-
-@media (max-width : 1425px){
-	.top_nav{
-		display : none;
-	}
-}
-@media (max-width : 1200px){
-	.top_user>.sign_up{
-		display : none;
-	}
-	.logout_menu{
-		display : none;
-	}
-}
-@media (max-width : 875px){
-	.reg_menu{
-		display : none;
-	}
-}
-@media (max-width : 750px){
-	.top_menu>.search_menu{
-		right : -13%;
-	}
-
-}
-
-@media (max-width : 700px){
-	.userList_menu{
-		display : none;
-	}
-	.top_menu>.search_menu{
-		display : none;
-	}
-}
-@media (max-width : 600px){
-	.logout_menu{
-		display : none;
-	}
-	.user_menu{
-		right : 10%;
-	}
-	.logo_text{
-	    place-content: center;
-	}
-}
-@media (max-width : 520px){
-	.top_user>.login{
-		display : none;
-	}
-
-}
-@media (max-width : 620px){
-	.top_user>.sign_up{
-		display : none;
-	}
+@media screen and (max-width: 1300px) {
+  .top_nav{
+    display : none;
+  }
 }
 .sm_menu{
 	display : none;
@@ -174,6 +162,14 @@ body {
     flex: auto;
     right: -15%;
     z-index :0;
+}
+@media screen and (max-width: 1200px) {
+  .search_bar{
+    display : none;
+  }
+  .top_menu {
+  	width : 50%;
+  }
 }
 .search_box{
 	position: relative;
@@ -214,14 +210,14 @@ input:focus{
 .category{
 	display : flex;
 	flex-direction : column;
-	height : 250px;
+	height : 450px;
 	padding-top:100px;
 }
 .category>.row{
 	flex:1;
 	width : 500px;
 	justify-content: center;
-	height : 125px !important;
+	height : 150px !important;
 	margin : auto;
 	text-align : center;
 }
@@ -231,7 +227,7 @@ input:focus{
 	text-decoration : none;
 	padding : 0;
 	margin : 0;
-	
+	color : black;
 }
 .category>.row>.col{
 	align-self : center;
@@ -392,7 +388,13 @@ a{
     display: flex;
     place-items: center;
 }
-
+.slick-track>a{
+	max-width : 250px;
+}
+.shop_title, .shop_item_content_detail{
+	overflow : hidden;
+	max-width : 240px;
+}
 .chat_area{
 	background-color : white;
 	position : fixed;
@@ -400,11 +402,13 @@ a{
 	left : 0; 
 	bottom : 0;
     border: 1px solid #c9c9c9;
+    border-radius:5px;
 }
 .chatTop{
     background-color: #1E90FF;
     height: 30px;
     width : 250px;
+    border-radius:5px;
 }
 #min_process{
 	display:none;
@@ -415,6 +419,7 @@ a{
     color: white;
     float: right;
     right: 0;
+    border-radius:5px;
 }
 .chat{
 	display:none;
@@ -465,6 +470,7 @@ a{
     background-color: #1E90FF;
     width: 29px;
     height: 29px;	
+    border-radius:5px;
 }
 #chat_box::-webkit-scrollbar {
 	width: 5px;

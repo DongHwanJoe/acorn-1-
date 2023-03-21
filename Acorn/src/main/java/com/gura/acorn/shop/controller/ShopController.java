@@ -141,7 +141,6 @@ public class ShopController {
 	public String index2(HttpServletRequest request) {
 		service.getTopList(request);
 		return "index";
-		
 	}
 	
 	@RequestMapping("/shop/list")
@@ -283,5 +282,10 @@ public class ShopController {
 		service.getDetail(request);
 		service.menuGetList(request);
 		return "statistics/example_1";
+	}
+	
+	@RequestMapping("/webtoon")
+	public String webtoonList(HttpServletRequest request) {
+		return "webtoon";
 	}
 }
