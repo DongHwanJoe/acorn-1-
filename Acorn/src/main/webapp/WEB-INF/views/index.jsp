@@ -61,7 +61,7 @@
 				</button>
 			</div>
 		</div>
-
+ 
 		<div id="simple-list-item-2" class="category">
 			<div class="row" style="font-size: 40px; margin-bottom: 10px;">
 			FOOD CATEGORY
