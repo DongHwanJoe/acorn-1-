@@ -106,7 +106,7 @@ body {
 .top_menu>.top_user>a{
 	text-decoration : none;
 	height :25px;
-	padding-top: 6px;
+	padding-top: 8px;
 	margin-left : 5px;
 }
 .login, .sign_up{
@@ -363,7 +363,7 @@ a{
 .statistics_bg2>img{
 	width : 500px;
 }
-/* effect */
+/* effect 
 .rainbow_effect{
 	animation-duration: 1s; 
 	animation-name: rainbowLink; 
@@ -379,7 +379,7 @@ a{
  90% { background-color: #6b2aff; } 
  100% { background-color: #e82aff; }
 }
-
+*/
 .cloud_effect{
     height: 50px;
     animation-duration: 20s;

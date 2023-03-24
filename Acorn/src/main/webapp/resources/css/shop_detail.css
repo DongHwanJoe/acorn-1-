@@ -368,7 +368,7 @@ button:hover {
     height: 50px;
 }
 
-/* 특수 효과 */
+/* 특수 효과 
 .rainbow_effect{
    animation-duration: 1s; 
    animation-name: rainbowLink; 
@@ -384,6 +384,7 @@ button:hover {
  90% { background-color: #6b2aff; } 
  100% { background-color: #e82aff; }
 }
+*/
 .cloud_effect{
    animation-duration: 20s; 
    animation-name: cloudLink; 

@@ -54,7 +54,7 @@ button {
 		data-bs-offset="0" data-bs-smooth-scroll="true"
 		class="scrollspy-example" tabindex="0">
 		<div id="simple-list-item-1" class="container">
-			<h1>UPDATE STORE</h1>
+			<h1>음식점 정보 수정</h1>
 			<form action="${pageContext.request.contextPath}/shop/update"
 				method="Get" id="updateForm">
 				<!-- 숨겨진 imageform을 통해 등록된 이미지를 폼에 제출할 수 있도록 하는 hidden input -->
@@ -64,7 +64,7 @@ button {
 				<!-- 점포명 input -->
 				<div class="row">
 					<div class="col-4">
-						<label class="form-label" for="title">NAME</label>
+						<label class="form-label" for="title">음식점 명</label>
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" name="title" id="title"
@@ -76,7 +76,7 @@ button {
 				<br />
 				<div class="row">
 					<div class="col-4" style="text-align: right;">
-						<label class="form-label" for="categorie">CATEGORIES</label>
+						<label class="form-label" for="categorie">카테고리</label>
 					</div>
 					<div class="col-8" style="text-align: left; padding-left: 20px;">
 						<select class="dropdown" name="categorie" id="categorie">
@@ -103,7 +103,7 @@ button {
 				<!-- 번호 input -->
 				<div class="row">
 					<div class="col-4">
-						<label class="form-label" for="telNum">TEL NO.</label>
+						<label class="form-label" for="telNum">전화번호</label>
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" name="telNum" id="telNum"
@@ -115,7 +115,7 @@ button {
 				<!-- 주소 input -->
 				<div class="row">
 					<div class="col-4">
-						<label class="form-label" for="addr">ADDRESS</label>
+						<label class="form-label" for="addr">주소</label>
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="text" name="addr" id="addr"
@@ -127,7 +127,7 @@ button {
 				<!-- 영업 시간 -->
 				<div class="row">
 					<div class="col-4">
-						<label class="form-label" for="startTime">OPEN</label>
+						<label class="form-label" for="startTime">개점 시간</label>
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="time" name="startTime"
@@ -137,7 +137,7 @@ button {
 				<br />
 				<div class="row">
 					<div class="col-4">
-						<label class="form-label" for="endTime">CLOSE</label>
+						<label class="form-label" for="endTime">폐점 시간</label>
 					</div>
 					<div class="col-8">
 						<input class="form-control" type="time" name="endTime"
@@ -150,7 +150,7 @@ button {
 					<!-- 가게 섬네일 등록을 위해 클릭하게 될 이미지 -->
 					<div class="col-4">
 						<label class="form-label" for="content"
-							style="inline-size: -webkit-fill-available;">EXPAIN</label> <a
+							style="inline-size: -webkit-fill-available;">설명</label> <a
 							id="profileLink" href="javascript:"> <c:choose>
 								<c:when test="${ empty dto.imagePath }">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -173,7 +173,7 @@ button {
 					</div>
 				</div>
 				<br />
-				<button class="btn btn-outline-success" type="submit">REGIST</button>
+				<button class="btn btn-outline-success" type="submit">저장하기</button>
 
 			</form>
 

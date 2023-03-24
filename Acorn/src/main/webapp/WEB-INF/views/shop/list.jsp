@@ -93,8 +93,7 @@
 								<li class="shop_item_content_detail">${tmp.categorie}, ${tmp.startTime}~ ${tmp.endTime}, ${tmp.telNum}</li>
 								<li class="shop_item_content_detail">
 									👀 <b style="color: blue;">${tmp.viewCount }</b>,
-									리뷰 <b style="color: red;">${tmp.rCount }</b>,
-									etc..
+									리뷰 <b style="color: red;">${tmp.rCount }</b>
 								</li>
 							</ul>
 						</div>

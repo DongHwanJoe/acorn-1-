@@ -46,7 +46,7 @@ body::-webkit-scrollbar-thumb {
 	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
 		<div id="simple-list-item-1" class="container">
 			<br /><br /><br />
-		    <h1>SIGN-UP</h1>
+		    <h1>회원가입</h1>
 		    <br />
 		    <form action="${pageContext.request.contextPath}/users/signup" method="post" id="myForm">
 		      <div>
@@ -77,7 +77,7 @@ body::-webkit-scrollbar-thumb {
 		         <small class="form-text" style="color:#CECECE; font-size:12px;">foodcloud@acorn.com 과 같은 이메일 정규표현식으로 입력해주세요</small>
 		      </div>
 		      <br />
-		      <button class="btn btn-outline-success" type="submit">SIGN-UP</button>
+		      <button class="btn btn-outline-success" type="submit">회원가입</button>
 		   </form>
 		</div>   
 	</div>

@@ -79,7 +79,7 @@ textarea {
 	</jsp:include>
 	<div class="container">
 		<br /> <br />
-		<h1>INSERT MENU</h1>
+		<h1>메뉴 등록</h1>
 		<br />
 		<form action="${pageContext.request.contextPath}/shop/menu_insert"
 			method="get" id="insertForm">
@@ -90,14 +90,14 @@ textarea {
 
 			<!-- 메뉴명 input -->
 			<div class="mb-3">
-				<label class="form-label" for="name">MENU</label> <input
+				<label class="form-label" for="name">메뉴 명</label> <input
 					class="form-control" type="text" name="name" id="name" />
 			</div>
 			<br />
 
 			<!-- 가격 input -->
 			<div class="mb-3">
-				<label class="form-label" for="price">PRICE</label> <input
+				<label class="form-label" for="price">가격</label> <input
 					class="form-control" type="text" name="price" id="price" />
 			</div>
 			<br />
@@ -105,7 +105,7 @@ textarea {
 			<!-- 사진 및 메뉴소개 -->
 			<div class="mb-3" style="position: relative;">
 				<label class="form-label" for="content"
-					style="top: -130px; position: relative;">EXPLAIN</label>
+					style="top: -130px; position: relative;">설명</label>
 
 				<!-- 섬네일 등록을 위해 클릭할 이미지 -->
 				<a id="thumbnailLink" href="javascript:"> <img
@@ -115,7 +115,7 @@ textarea {
 
 				<textarea class="form-control" name="content" id="content"></textarea>
 			</div>
-			<button class="btn btn-outline-success" type="submit">INSERT</button>
+			<button class="btn btn-outline-success" type="submit">등록하기</button>
 		</form>
 
 		<!-- 이미지 등록용 숨겨진 form -->
