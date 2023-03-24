@@ -20,8 +20,6 @@ public class ShopReviewDto {
 	private int gCount;
 	
 	public ShopReviewDto() {}
-
-	
 	
 	public ShopReviewDto(int num, String writer, String content, String title, int ref_group, int review_group,
 			String deleted, double grade, String regdate, String profile, int startRowNum, int endRowNum,

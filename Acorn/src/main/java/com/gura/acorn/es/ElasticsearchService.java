@@ -45,9 +45,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ElasticsearchService {
 
-    @Autowired
-    private ElasticsearchRestTemplate elasticsearchTemplate;
-
     ClientConfiguration clientConfiguration = ClientConfiguration.builder()
     		.connectedTo("34.125.190.255:9200")
             .withBasicAuth("elastic", "acorn")
@@ -55,8 +52,8 @@ public class ElasticsearchService {
     
     RestHighLevelClient client = RestClients.create(clientConfiguration).rest();
     
-    public Map<String, Object> aggregateByMonthUV() throws IOException {
-    	// date_histogram 집계 쿼리를 작성합니다.
+    //월 별 UV를 집계하는 메소드
+    public Map<String, Object> aggrUVByMonth() throws IOException {
     	SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
     	SearchRequest searchRequest = new SearchRequest("uvtest");
     	
@@ -86,8 +83,8 @@ public class ElasticsearchService {
         return groupCounts;
     }
     
-    public Map<String, Object> aggregateByMonth() throws IOException {
-    	// date_histogram 집계 쿼리를 작성합니다.
+    //월별 PV, MaxPVStore, Category를 집계하는 메소드
+    public Map<String, Object> aggPVByMonth() throws IOException {
     	SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
     	SearchRequest searchRequest = new SearchRequest("testlog6");
     	
@@ -147,7 +144,6 @@ public class ElasticsearchService {
                 }
         	}
             
-            
 			Terms categoryAgg = bucket.getAggregations().get("category_count");
             for (Terms.Bucket categoryBucket : categoryAgg.getBuckets()) {
             	String category = categoryBucket.getKeyAsString();
@@ -161,7 +157,7 @@ public class ElasticsearchService {
         return groupCounts;
     }
 
-    //index의 모든 id값의 개수를 추출
+    //index의 모든 id값의 개수를 추출(총 PV 검색)
     public Map<String, Object> getTotalPV() throws IOException {
         SearchRequest searchRequest = new SearchRequest("testlog6");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -179,8 +175,8 @@ public class ElasticsearchService {
         return resultMap;
     }
     
-  //기간내의 데이터 검색 + 
-    public Map<String, Object> searchByDateRange3() throws IOException {
+    //저번 달 PV가 가장 높은 음식점 검색
+    public Map<String, Object> getMaxPVStore() throws IOException {
         SearchRequest searchRequest = new SearchRequest("testlog6");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         
@@ -217,7 +213,7 @@ public class ElasticsearchService {
     	}
     }
 
-    
+    //어제 하루 PV검색
     public Map<String, Object> searchDayPV(String indexName, String field) throws IOException {
     	
     	LocalDate yesterday = LocalDate.now().minusDays(1);

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class StatisticsController {
-
 	
 	@RequestMapping("statistics/statistics")
 	public String statistics(HttpServletRequest request) {

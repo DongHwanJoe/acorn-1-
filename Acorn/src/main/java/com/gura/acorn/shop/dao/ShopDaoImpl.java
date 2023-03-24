@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gura.acorn.shop.dto.ShopDto;
+
 @Repository
 public class ShopDaoImpl implements ShopDao{
 
@@ -42,7 +43,6 @@ public class ShopDaoImpl implements ShopDao{
 		return session.selectOne("shop.getData",num);
 	}
 	
-	//검색정보
 	@Override
 	public ShopDto getData(ShopDto dto) {
 		return session.selectOne("shop.getData2", dto);

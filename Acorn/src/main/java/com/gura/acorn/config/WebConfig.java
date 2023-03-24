@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.gura.acorn.Interceptor.LoggingInterceptor;
 
-//설정과 관련된 java파일에는 @Configuration 어노테이션을 ㅊ가한다.
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 

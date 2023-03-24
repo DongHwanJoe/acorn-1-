@@ -13,9 +13,9 @@ import com.gura.acorn.shop.dto.ShopReviewDto;
 public interface ShopService {
 	//가게 리스트 얻어오기
 	public void getList(HttpServletRequest request);
-	//가게 상세정보(가게별 메뉴/가격/사진 테이블 추가 후 조인까지 생각)
+	//가게 상세정보
 	public void getDetail(HttpServletRequest request);
-	//가게 등록(등록, 수정, 삭제 는 우선 관리자만 할 수 있도록?)
+	//가게 등록
 	public void saveContent(ShopDto dto);
 	//가게 정보 수정
 	public void updateContent(ShopDto dto, HttpServletRequest request);

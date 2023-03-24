@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gura.acorn.exception.NotDeleteException;
 import com.gura.acorn.shop.dao.ShopDao;
 import com.gura.acorn.shop.dao.ShopMenuDao;
 import com.gura.acorn.shop.dao.ShopReviewDao;
@@ -56,21 +57,13 @@ public class ShopServiceImpl implements ShopService{
 		// 보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 
-		/*
-	        [ 검색 키워드에 관련된 처리 ]
-	        -검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.    
-	        현재는 가게이름, 카테고리 (추후 검색기능 확대시 mapper 수정)  
-		*/
 		String keyword = request.getParameter("keyword");
-		String condition = request.getParameter("condition");
 		String category = request.getParameter("category");
 		
 		//만일 키워드가 넘어오지 않는다면 
 		if(keyword == null){
-			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
 			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
 			keyword="";
-			condition=""; 
 		}
 		if(category == null) {
 			category = "";
@@ -80,7 +73,7 @@ public class ShopServiceImpl implements ShopService{
 		String encodedK = URLEncoder.encode(keyword);
 		String encodedC = URLEncoder.encode(category);
 		    
-		//CafeDto 객체에 startRowNum 과 endRowNum 을 담는다.
+		//Dto 객체에 startRowNum 과 endRowNum 을 담는다.
 		ShopDto dto = new ShopDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
@@ -119,13 +112,10 @@ public class ShopServiceImpl implements ShopService{
 		request.setAttribute("category", category);
 		request.setAttribute("encodedC", encodedC);
 		request.setAttribute("totalRow", totalRow);
-		request.setAttribute("condition", condition);
-
 	}
 
 	@Override
 	public void getDetail(HttpServletRequest request) {
-
 		//보여줄 글 번호를 읽어오기
 		int num = Integer.parseInt(request.getParameter("num"));
 		
@@ -133,13 +123,11 @@ public class ShopServiceImpl implements ShopService{
 		shopDao.addViewCount(num);
 		
 		String keyword = request.getParameter("keyword");
-		String condition = request.getParameter("condition");
 		//만일 키워드가 넘어오지 않는다면 
 		if(keyword == null){
 			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
 			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
 			keyword = "";
-			condition = ""; 
 		}
 		
 		String encodedK = URLEncoder.encode(keyword);
@@ -150,10 +138,8 @@ public class ShopServiceImpl implements ShopService{
 		if(!keyword.equals("")){
 			dto.setTitle(keyword);
 		}
-		//글 정보 얻기
-		ShopDto resultDto = shopDao.getData(dto);
 		
-		//[ 리뷰 페이징 처리에 관련된 로직 ]
+		ShopDto resultDto = shopDao.getData(dto);
 		
 		//한 페이지에 몇개씩 표시할 것인지
 		final int RV_PAGE_ROW_COUNT = 5;
@@ -193,7 +179,6 @@ public class ShopServiceImpl implements ShopService{
 			rvEndPageNum = rvTotalPageCount; // 보정해 준다.
 		}
 		
-		
 		//request에 담기
 		request.setAttribute("dto", resultDto);
 		request.setAttribute("keyword", keyword);
@@ -201,7 +186,6 @@ public class ShopServiceImpl implements ShopService{
 		request.setAttribute("rvStartPageNum", rvStartPageNum);
 		request.setAttribute("rvEndPageNum", rvEndPageNum);
 		request.setAttribute("encodedK", encodedK);
-		request.setAttribute("condition", condition);
 		request.setAttribute("rvTotalRow", rvTotalRow);
 		request.setAttribute("reviewList", reviewList);
 		request.setAttribute("rvTotalPageCount", rvTotalPageCount);
@@ -287,7 +271,6 @@ public class ShopServiceImpl implements ShopService{
 			map.put("imagePath", saveFileName);
 		}
 		
-		
 		return map;
 	}
 
@@ -340,12 +323,10 @@ public class ShopServiceImpl implements ShopService{
 		ShopReviewDto dto = shopReviewDao.getData(num);
 		String id = (String)request.getSession().getAttribute("id");
 		
-		/*글 작성자와 로그인된 아이디와 일치하지 않으면 처리를 막기 위한 익셉션코드 추후 활성화 예정
 		if(!dto.getWriter().equals(id)) {
-			throw new NotDeleteException("관리자만 삭제 가능합니다.");
+			throw new NotDeleteException("작성자 또는 관리자만 삭제 가능합니다.");
 		}
 	    
-	    */
 		shopReviewDao.delete(num);
 	}
 
@@ -358,67 +339,11 @@ public class ShopServiceImpl implements ShopService{
 	//페이징 기능은 유지하되 검색기능 작동하지 않음.
 	@Override
 	public void menuGetList(HttpServletRequest request) {
-		// 한 페이지에 몇개씩 표시할 것인지
-		final int PAGE_ROW_COUNT = 5;
-		// 하단 페이지를 몇개씩 표시할 것인지 (css에 따라 삭제 및 변경 있을 수 있음)
-		final int PAGE_DISPLAY_COUNT = 5;
-
-		// 보여줄 페이지의 번호를 일단 1이라고 초기값 지정
-		int pageNum = 1;
-
-		// 페이지 번호가 파라미터로 전달되는지 읽어와 본다.
-		String strPageNum = request.getParameter("pageNum");
-		// 만일 페이지 번호가 파라미터로 넘어 온다면
-		if (strPageNum != null) {
-			// 숫자로 바꿔서 보여줄 페이지 번호로 지정한다.
-			pageNum = Integer.parseInt(strPageNum);
-		}
-
-		// 보여줄 페이지의 시작 ROWNUM
-		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
-		// 보여줄 페이지의 끝 ROWNUM
-		int endRowNum = pageNum * PAGE_ROW_COUNT;
-
-		/*
-	        [ 검색 키워드에 관련된 처리 ]
-	        -검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.    
-	        현재는 가게이름, 카테고리 (추후 검색기능 확대시 mapper 수정)  
-		*/
-		String keyword = request.getParameter("keyword");
-		String condition = request.getParameter("condition");
-		//만일 키워드가 넘어오지 않는다면 
-		if(keyword == null){
-			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
-			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
-			keyword="";
-			condition=""; 
-		}
-		
-		//특수기호를 인코딩한 키워드를 미리 준비한다. 
-		String encodedK = URLEncoder.encode(keyword);
-		    
-		//CafeDto 객체에 startRowNum 과 endRowNum 을 담는다.
-		ShopMenuDto dto = new ShopMenuDto();
-		dto.setStartRowNum(startRowNum);
-		dto.setEndRowNum(endRowNum);
 		
 		int num =Integer.parseInt(request.getParameter("num"));
 		
 		// 목록을 select 해 온다.(검색 키워드가 있는경우 키워드에 부합하는 전체 글)
 		List<ShopMenuDto> menuList = shopMenuDao.getList(num);
-		// 전체 글의 갯수(검색 키워드가 있는경우 키워드에 부합하는 전체 글의 개수)
-		int totalRow = shopMenuDao.getCount(dto.getNum());
-		// 하단 시작 페이지 번호
-		int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
-		// 하단 끝 페이지 번호
-		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
-		// 전체 페이지의 갯수 구하기
-		int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
-		// 끝 페이지 번호가 이미 전체 페이지 갯수보다 크게 계산되었다면 잘못된 값이다.
-		if (endPageNum > totalPageCount) {
-			endPageNum = totalPageCount; // 보정해 준다.
-		}
-		
 		
 		request.setAttribute("menuList", menuList);
 	}
@@ -452,20 +377,13 @@ public class ShopServiceImpl implements ShopService{
 		// 보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 
-		/*
-			[ 검색 키워드에 관련된 처리 ]
-			-검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.    
-			현재는 가게이름, 카테고리 (추후 검색기능 확대시 mapper 수정)  
-		 */
 		String keyword = request.getParameter("keyword");
-		String condition = request.getParameter("condition");
     
 		//만일 키워드가 넘어오지 않는다면 
 		if(keyword == null){
 			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
 			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
 			keyword="";
-			condition=""; 
 		}
     
 		//특수기호를 인코딩한 키워드를 미리 준비한다. 
@@ -509,7 +427,6 @@ public class ShopServiceImpl implements ShopService{
 		request.setAttribute("rvkeyword", keyword);
 		request.setAttribute("rvencodedK", encodedK);
 		request.setAttribute("rvtotalRow", totalRow);
-		request.setAttribute("rvcondition", condition);
 	}
 
 	@Override
@@ -535,13 +452,7 @@ public class ShopServiceImpl implements ShopService{
 		// 보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 
-		/*
-	        [ 검색 키워드에 관련된 처리 ]
-	        -검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.    
-	        현재는 가게이름, 카테고리 (추후 검색기능 확대시 mapper 수정)  
-		*/
 		String keyword = request.getParameter("keyword");
-		String condition = request.getParameter("condition");
 		String category = request.getParameter("category");
 		
 		//만일 키워드가 넘어오지 않는다면 
@@ -549,7 +460,6 @@ public class ShopServiceImpl implements ShopService{
 			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
 			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
 			keyword="";
-			condition=""; 
 		}
 		if(category == null) {
 			category = "";
@@ -602,7 +512,6 @@ public class ShopServiceImpl implements ShopService{
 		request.setAttribute("category", category);
 		request.setAttribute("encodedC", encodedC);
 		request.setAttribute("totalRow", totalRow);
-		request.setAttribute("condition", condition);
 	}
 
 	@Override
