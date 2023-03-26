@@ -30,6 +30,7 @@ public interface ShopService {
 	public void saveReview(HttpServletRequest request);//리뷰 저장
 	public void deleteReview(HttpServletRequest request);//리뷰 삭제
 	public void updateReview(ShopReviewDto dto); //리뷰수정
+	public void moreReviewList(HttpServletRequest request);//리뷰 더보기 기능
 	
 	public void saveMenu(ShopMenuDto dto, HttpServletRequest request);
 	public void menuGetList(HttpServletRequest request);
