@@ -110,7 +110,7 @@ a {
 				<th>비밀번호</th>
 				<td><a
 					href="${pageContext.request.contextPath}/users/pwd_updateform"
-					class="btn btn-outline-info" style="padding: 2px;">수정하기</a></td>
+					class="btn btn-outline-info" style="padding: 2px;">비밀번호 수정</a></td>
 			</tr>
 			<tr style="height: 10px;"></tr>
 			<tr>
@@ -127,12 +127,12 @@ a {
 		<br> <br> 
 			<c:choose>
 				<c:when test="${sessionScope.id eq 'admin'}">
-					<a href="${pageContext.request.contextPath}/shop/insertform" class="btn btn-outline-success">INSERT SHOP</a> 
-					<a href="${pageContext.request.contextPath}/users/list" class="btn btn-outline-secondary">USER LIST</a>
+					<a href="${pageContext.request.contextPath}/shop/insertform" class="btn btn-outline-success">음식점 등록</a> 
+					<a href="${pageContext.request.contextPath}/users/list" class="btn btn-outline-secondary">사용자 목록</a>
 				</c:when>
 			</c:choose>
-			<a href="javascript:" id="edit_link" class="btn btn-outline-warning">EDIT</a>
-			<a href="javascript:deleteConfirm()" class="btn btn-outline-danger">DROP-OUT</a>
+			<a href="javascript:" id="edit_link" class="btn btn-outline-warning">수정하기</a>
+			<a href="javascript:deleteConfirm()" class="btn btn-outline-danger">회원 탈퇴</a>
 
 		<form id="imageForm"
 			action="${pageContext.request.contextPath}/users/profile_upload"

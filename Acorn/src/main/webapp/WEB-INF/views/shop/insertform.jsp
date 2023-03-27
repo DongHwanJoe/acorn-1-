@@ -38,7 +38,7 @@ body::-webkit-scrollbar-thumb {
 	</jsp:include>
 	<div class="container">
 	<br />
-		<h1>INSERT SHOP</h1>
+		<h1>음식점 등록</h1>
 		<br />
 		<form action="${pageContext.request.contextPath}/shop/insert" method="post" id="insertForm">
 			<!-- 실제 제출 될 이미지 값 -->
@@ -47,7 +47,7 @@ body::-webkit-scrollbar-thumb {
 			<!-- 점포명 input -->
 			<div class="row">
 				<div class = "col-4">
-					<label class="form-label" for="title">NAME</label>					
+					<label class="form-label" for="title">음식점 명</label>					
 				</div>
 				<div class = "col-8">
 					<input class="form-control" type="text" name="title" id="title" />
@@ -57,7 +57,7 @@ body::-webkit-scrollbar-thumb {
 			<!-- 카테고리 input -->
 			<div class="row">
 				<div class="col-4" style="text-align: right;">
-					<label class="form-label" for="categorie">CATEGORIES</label>
+					<label class="form-label" for="categorie">카테고리</label>
 				</div>
 				<div class="col-8" style="text-align: left; padding-left: 20px;">
 					<select class="dropdown" name="categorie" id="categorie">
@@ -76,7 +76,7 @@ body::-webkit-scrollbar-thumb {
 			<!-- 번호 input -->
 			<div class="row">
 				<div class = "col-4">
-					<label class="form-label" for="telNum">TEL NO.</label>					
+					<label class="form-label" for="telNum">전화번호</label>					
 				</div>
 				<div class = "col-8">
 					<input class="form-control" type="text" name="telNum" id="telNum" />
@@ -87,7 +87,7 @@ body::-webkit-scrollbar-thumb {
 			<!-- 주소 input -->			
 			<div class="row">
 				<div class = "col-4">
-					<label class="form-label" for="addr">ADDRESS</label>				
+					<label class="form-label" for="addr">주소</label>				
 				</div>
 				<div class = "col-8">
 					<input	class="form-control" type="text" name="addr" id="addr" />
@@ -98,7 +98,7 @@ body::-webkit-scrollbar-thumb {
 			<!-- 영업 시간 -->
 			<div class="row">
 				<div class = "col-4">
-					<label class=" form-label" for="startTime">OPEN</label>			
+					<label class=" form-label" for="startTime">개점 시간</label>			
 				</div>
 				<div class = "col-8">
 					<input	class="form-control" type="time" name="startTime" id="startTime" value="00:00" max="12:59"/>
@@ -107,7 +107,7 @@ body::-webkit-scrollbar-thumb {
 			<br/>
 			<div class="row">
 				<div class = "col-4">
-					<label	class="form-label" for="endTime">CLOSE</label> 	
+					<label	class="form-label" for="endTime">폐점 시간</label> 	
 				</div>
 				<div class = "col-8">
 					<input	class="form-control" type="time" name="endTime" id="endTime" value="00:00" max="12:59" />
@@ -118,7 +118,7 @@ body::-webkit-scrollbar-thumb {
 			<div class="row">
 				<!-- 가게 섬네일 등록을 위해 클릭하게 될 이미지 -->
 				<div class = "col-4">
-					<label class="form-label" for="content" style="inline-size: -webkit-fill-available;">EXPAIN</label>
+					<label class="form-label" for="content" style="inline-size: -webkit-fill-available;">설명</label>
 					<a id="thumbnailLink" href="javascript:">
 						<svg class="camera_img" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="upload_img bi bi-camera" viewBox="0 0 16 16">
 						    <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
@@ -131,7 +131,7 @@ body::-webkit-scrollbar-thumb {
 				</div>
 			</div>
 			<br />
-			<button class="btn btn-outline-success" type="submit">INSERT</button>
+			<button class="btn btn-outline-success" type="submit">등록하기</button>
 		</form>
 
 		<!-- 가게 섬네일 등록을 위한 폼 -->

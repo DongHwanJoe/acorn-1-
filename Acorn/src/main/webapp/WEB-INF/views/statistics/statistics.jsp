@@ -528,6 +528,8 @@ const app = Vue.createApp({
 			}
 		});
 		viewObject4 = await response4.json();
+		
+		console.log(viewObject4);
 
 		var currTime2 = 0;
 		var secData=[];
@@ -588,6 +590,14 @@ const app = Vue.createApp({
 	          },
 			options: {
 				plugins: {
+					title: {
+						display: true,
+						text: '서비스 이용 로그(Request/Response/Error)',
+						font:{
+							size: 20,
+						},
+						padding: 0,
+					},
 					tooltip: {
 						  callbacks: {
 						    title: function(tooltipItem, data) {

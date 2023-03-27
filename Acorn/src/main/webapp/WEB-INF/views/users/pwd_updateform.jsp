@@ -46,31 +46,31 @@ h1{
 		<div id="simple-list-item-1" class="container">
 			<br />
 
-			<h1>CHANGE P/W</h1>
+			<h1>비밀번호 수정</h1>
 			<br> <br>
 			<form action="${pageContext.request.contextPath}/users/pwd_update"
 				method="post" id="myForm">
 				<div>
-					<label class="control-label" for="pwd">OLD P/W</label> <input
+					<label class="control-label" for="pwd">이전 비밀번호</label> <input
 						class="form-control" type="password" name="pwd" id="pwd" />
 				</div>
 				<br />
 				<div>
-					<label class="control-label" for="newPwd">NEW P/W</label> <input
+					<label class="control-label" for="newPwd">새 비밀번호</label> <input
 						class="form-control" type="password" name="newPwd" id="newPwd" />
 					<div class="invalid-feedback">비밀번호를 확인 하세요</div>
 				</div>
 				<br />
 				<div>
-					<label class="control-label" for="newPwd2">NEW P/W CONFIRM</label>
+					<label class="control-label" for="newPwd2">새 비밀번호 확인</label>
 					<input class="form-control" type="password" id="newPwd2" /> <small
 						class="form-text" style="color: #cecece; font-size: 12px;">특수문자와
 						숫자를 포함한 8글자 이상의 비밀번호를 입력해주세요</small>
 				</div>
 				<br /> <br />
-				<button type="submit" class="btn btn-outline-warning">CHANGE</button>
+				<button type="submit" class="btn btn-outline-warning">변경하기</button>
 				<a href="${pageContext.request.contextPath}/users/info"
-					class="btn btn-outline-danger">CANCEL</a>
+					class="btn btn-outline-danger">취소</a>
 			</form>
 		</div>
 	</div>

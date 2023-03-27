@@ -70,8 +70,11 @@
 				</div>
 				
 				<div class="top_user">
-					<a href="${pageContext.request.contextPath}/users/info" class="user_menu rainbow_effect user_menu badge">${sessionScope.id }</a>
-					<a id="logout" href="javascript:" class="logout_menu btn btn-outline-danger" style="padding-top: 0px;">LOGOUT</a>
+					<a href="${pageContext.request.contextPath}/users/info"
+						class="user_menu badge text-bg-warning">${sessionScope.id }</a> <a
+						id="logout" href="javascript:"
+						class="logout_menu btn btn-outline-danger"
+						style="padding-top: 0px;">LOGOUT</a>
 				</div>
 			</div>
 		</c:when>
@@ -111,7 +114,9 @@
 
 <div class="chat_area">
 	<div class="chatTop">
-		<p style="padding-top: 2%; margin-left: 2%; color: white;" id="chatTop">CHAT</p>
+		<p style="padding-top: 2%; margin-left: 2%; color: white; text-align:left;"
+			id="chatTop">CHAT</p>
+
 		<svg id="min_process" xmlns="http://www.w3.org/2000/svg"
 			fill="currentColor" class="bi bi-arrow-down-left-square"
 			viewBox="0 0 16 16">

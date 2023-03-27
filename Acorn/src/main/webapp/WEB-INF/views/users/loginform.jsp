@@ -61,6 +61,7 @@ body::-webkit-scrollbar-thumb {
 	place-items: center;
 }
 .logo_text{
+	z-index : 5;
     place-content: center;
     width: 300px;
     HEIGHT: 50PX;
@@ -110,7 +111,7 @@ body::-webkit-scrollbar-thumb {
 	
 	    <div class="form-floating">
 	      <input name="id" value="${cookie.savedId.value }" type="text" class="form-control" id="floatingInput" placeholder="id">
-	      <label for="floatingInput">아이디</label>
+	      <label for="floatingInput" style="height: 58.5px; bottom:0; top:auto;">아이디</label>
 	    </div>
 	    <div class="form-floating">
 	      <input name="pwd" value="${cookie.savedPwd.value }" type="password" class="form-control" id="floatingPassword" placeholder="password">

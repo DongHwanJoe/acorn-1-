@@ -28,29 +28,47 @@
 			<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active" data-bs-interval="5000">
-						<img src="https://www.sivandesign.com/wp-content/uploads/2016/11/SD-Top-Slides-HOME-civilcad-1920x520-final.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner2.jpg" class="d-block w-100" alt="...">
+						
+						<div class="banner_wrapper" style="left : 10%;">
+							<p class="banner_title" >맛집 정보 서비스<br/>FOOD CLOUD <br />OPEN</p>
+						</div>
+
 					</div>
 					<div class="carousel-item" data-bs-interval="5000">
-						<img src="https://luxurycottages.com/wp-content/uploads/2020/05/Mam-Tor-1920x520.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner1.jpg" class="d-block w-100" alt="...">
+						<div class="banner_wrapper" style="left : 10%;">
+							<p class="banner_title" >후기를 사용자들과<br/>공유해주세요</p>
+							<a href="${pageContext.request.contextPath}/shop/list" style="position:absolute; right : 10%; bottom : 10%; border:solid 1px white; color : white; font-size : 12px; background-color:cornflowerblue; padding:10px;">음식점 리스트로 이동  ⇀ </a>
+						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="https://www.teahub.io/photos/full/280-2809437_best-guitars-for-metal-rock-guitar.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner3.jpg" class="d-block w-100" alt="...">
+						<div class="banner_wrapper" style="right : 10%;">
+							<p class="banner_title" >서비스 이용 정보를<br/>차트로 만나보세요</p>
+							<a href="${pageContext.request.contextPath}/statistics/statistics" style="position:absolute; right : 10%; bottom : 10%; border:solid 1px white; color : white; font-size : 12px; background-color:cornflowerblue; padding:10px;">통계 페이지로 이동  ⇀ </a>
+						</div>
 					</div>
 				</div>
-				
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
-				
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
 					<span class="visually-hidden">Next</span>
 				</button>
 			</div>
 		</div>
-
+ 
 		<div id="simple-list-item-2" class="category">
+			<div class="row" style="font-size: 40px; margin-bottom: 10px;">
+			FOOD CATEGORY
+			</div>
 			<div class="row">
 				<a href="${pageContext.request.contextPath}/shop/list"> 
 					<img src="${pageContext.request.contextPath}/resources/images/category/all.jpg" alt="전체" title="전체" class="col" />
