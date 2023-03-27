@@ -18,7 +18,13 @@
 					<c:if test="${param.thisPage eq 'index' }">
 						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
 					</c:if>
+<<<<<<< HEAD
+					<a
+						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  }
+						id="STATISTICS">STATISTICS</a>
+=======
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">RESEARCH</a>
+>>>>>>> refs/remotes/upstream/master
 				</div>
 				
 				<div class="search_menu">
@@ -47,10 +53,24 @@
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
+<<<<<<< HEAD
+				<div id="simple-list-example"
+					class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> <a
+						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
+						id="category">CATEGORY</a>
+					<c:if test="${param.thisPage eq 'index' }">
+						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
+					</c:if>
+					<a
+						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
+						id="STATISTICS">STATISTICS</a>
+=======
 				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
 					<a href="#simple-list-item-1">TOP</a> 
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">RESEARCH</a>
+>>>>>>> refs/remotes/upstream/master
 				</div>
 				
 				<div class="search_menu">
@@ -67,8 +87,11 @@
 				</div>
 				
 				<div class="top_user">
-					<a href="${pageContext.request.contextPath}/users/info" class="user_menu rainbow_effect user_menu badge">${sessionScope.id }</a>
-					<a id="logout" href="javascript:" class="logout_menu btn btn-outline-danger" style="padding-top: 0px;">LOGOUT</a>
+					<a href="${pageContext.request.contextPath}/users/info"
+						class="user_menu badge text-bg-warning">${sessionScope.id }</a> <a
+						id="logout" href="javascript:"
+						class="logout_menu btn btn-outline-danger"
+						style="padding-top: 0px;">LOGOUT</a>
 				</div>
 			</div>
 		</c:when>
@@ -78,10 +101,13 @@
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> 
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">RESEARCH</a>
+				<div id="simple-list-example"
+					class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> <a
+						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
+						id="category">CATEGORY</a> <a
+						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
+						id="STATISTICS">STATISTICS</a>
 				</div>
 				
 				<div class="search_menu">
@@ -108,7 +134,9 @@
 
 <div class="chat_area">
 	<div class="chatTop">
-		<p style="padding-top: 2%; margin-left: 2%; color: white;" id="chatTop">CHAT</p>
+		<p style="padding-top: 2%; margin-left: 2%; color: white; text-align:left;"
+			id="chatTop">CHAT</p>
+
 		<svg id="min_process" xmlns="http://www.w3.org/2000/svg"
 			fill="currentColor" class="bi bi-arrow-down-left-square"
 			viewBox="0 0 16 16">

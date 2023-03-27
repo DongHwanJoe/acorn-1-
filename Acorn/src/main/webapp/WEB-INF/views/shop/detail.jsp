@@ -30,7 +30,7 @@
 	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
 		<div class="shop">
 			<div id="simple-list-item-1" class="shop_board_top">
-				<img src="https://i.pinimg.com/736x/59/4f/22/594f229ad803a615c4dc1766829dd13c.jpg" alt="" />
+				<img src="/shop/images/${dto.imagePath }" alt="" />
 			</div>
 			<div class="shop_board_body1">
 				<div class="shop_board_title">
@@ -127,6 +127,7 @@
 				        $(document).on("mouseover",".menu_name",function(e){
 				        	var image_data = $(this).data("image");
 				            var add_caption = (image_data != undefined) ? "<br/>" + "ℹ️" +image_data : "" ;
+				            
 				            $("body").append("<p id='preview'><img src='" + $(this).attr("id") + "' width='400px'/>"+ add_caption +"</p>");
 				            $("#preview")
 				            .css("position", "fixed")

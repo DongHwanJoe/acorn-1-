@@ -27,51 +27,68 @@
 			<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active" data-bs-interval="5000">
-						<img src="https://www.sivandesign.com/wp-content/uploads/2016/11/SD-Top-Slides-HOME-civilcad-1920x520-final.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner2.jpg" class="d-block w-100" alt="...">
+						
+						<div class="banner_wrapper" style="left : 10%;">
+							<p class="banner_title" >맛집 정보 서비스<br/>FOOD CLOUD <br />OPEN</p>
+						</div>
+
 					</div>
 					<div class="carousel-item" data-bs-interval="5000">
-						<img src="https://luxurycottages.com/wp-content/uploads/2020/05/Mam-Tor-1920x520.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner1.jpg" class="d-block w-100" alt="...">
+						<div class="banner_wrapper" style="left : 10%;">
+							<p class="banner_title" >후기를 사용자들과<br/>공유해주세요</p>
+							<a href="${pageContext.request.contextPath}/shop/list" style="position:absolute; right : 10%; bottom : 10%; border:solid 1px white; color : white; font-size : 12px; background-color:cornflowerblue; padding:10px;">음식점 리스트로 이동  ⇀ </a>
+						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="https://www.teahub.io/photos/full/280-2809437_best-guitars-for-metal-rock-guitar.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/resources/images/banner3.jpg" class="d-block w-100" alt="...">
+						<div class="banner_wrapper" style="right : 10%;">
+							<p class="banner_title" >서비스 이용 정보를<br/>차트로 만나보세요</p>
+							<a href="${pageContext.request.contextPath}/statistics/statistics" style="position:absolute; right : 10%; bottom : 10%; border:solid 1px white; color : white; font-size : 12px; background-color:cornflowerblue; padding:10px;">통계 페이지로 이동  ⇀ </a>
+						</div>
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
 					data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
 				<button class="carousel-control-next" type="button"
 					data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
 					<span class="visually-hidden">Next</span>
 				</button>
 			</div>
 		</div>
-
+ 
 		<div id="simple-list-item-2" class="category">
+			<div class="row" style="font-size: 40px; margin-bottom: 10px;">
+			FOOD CATEGORY
+			</div>
 			<div class="row">
 				<a href="${pageContext.request.contextPath}/shop/list"> <img
 					src="${pageContext.request.contextPath}/resources/images/category/all.jpg"
 					alt="전체" title="전체" class="col" />
-	
+				전체
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=한식">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/hansik.jpg"
 					alt="한식" title="한식" class="col" />
-	
+				한식
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=중식">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/jungsik.jpg"
 					alt="중식" title="중식" class="col" />
-	
+				중식	
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=일식">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/ilsik.jpg"
 					alt="일식" title="일식" class="col" />
+				일식
 				</a>
 			</div>
 			<div class="row">
@@ -79,22 +96,25 @@
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/bunsik.jpg"
 					alt="분식" title="분식" class="col" />
+				분식
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=양식">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/yangsik.jpg"
 					alt="양식" title="양식" class="col" />
+				양식
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=패스트푸드">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/fastfood.jpg"
 					alt="패스트푸드" title="패스트푸드" class="col" />
-	
+				패스트푸드
 				</a> <a
 					href="${pageContext.request.contextPath}/shop/list?category=기타">
 					<img
 					src="${pageContext.request.contextPath}/resources/images/category/guitar.jpg"
 					alt="기타" title="기타" class="col" />
+				기타
 				</a>
 			</div>
 		</div>

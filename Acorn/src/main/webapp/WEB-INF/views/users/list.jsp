@@ -61,7 +61,7 @@ ul{
 		
 		<br />
 		<br />
-		<h3>USER LIST</h3>
+		<h3>사용자 목록</h3>
       	<br />
       	<div style="    border-radius: 10px;
 					    border: solid 1px white;
@@ -70,11 +70,11 @@ ul{
       	<table class="table table-striped" style="width : 100%; margin : 0px;">
          <thead class="table-dark">
             <tr>
-               <th style="width:105px;">ID</th>
-               <th style="width:180px;">E-MAIL</th>
-               <th>REGIST DATE</th>	
-               <th>BAN</th>
-               <th>STATUS</th>
+               <th style="width:105px;">아이디</th>
+               <th style="width:180px;">이메일</th>
+               <th>회원 가입일</th>	
+               <th>차단</th>
+               <th>상태</th>
             </tr>
          </thead>
          <tbody>
