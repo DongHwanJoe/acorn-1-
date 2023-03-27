@@ -167,14 +167,6 @@ public class UsersController {
 		return mView;
 	}
 	
-	
-	@RequestMapping("/users/updateform")
-	public ModelAndView updateform(HttpSession session, ModelAndView mView) {
-		service.getInfo(session, mView);
-		mView.setViewName("users/updateform");
-		return mView;
-	}
-	
 	//개인정보 수정 반영 요청 처리
 	@RequestMapping(value = "/users/update", method=RequestMethod.POST)
 	public ModelAndView update(UsersDto dto, HttpSession session, ModelAndView mView,

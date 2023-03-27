@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/shop_list.css">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,">
+<link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;">
 </head>
 <body>
 	<jsp:include page="../views/include/navbar.jsp">
@@ -170,7 +170,6 @@
 				<img src="${pageContext.request.contextPath}/resources/images/chart_img.jpg" alt="" />
 			</div>
 		</div>
-	</div>     
-
+	</div>
 </body>
 </html>

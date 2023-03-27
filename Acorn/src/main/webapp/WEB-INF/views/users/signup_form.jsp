@@ -39,11 +39,11 @@ body::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 }
 </style>
-<body class="text-center">
+<body>
 	<jsp:include page="../../views/include/navbar.jsp">
 		<jsp:param value="user02" name="thisPage"/>
 	</jsp:include>
-	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example text-center" tabindex="0">
 		<div id="simple-list-item-1" class="container">
 			<br /><br /><br />
 		    <h1>SIGN-UP</h1>
