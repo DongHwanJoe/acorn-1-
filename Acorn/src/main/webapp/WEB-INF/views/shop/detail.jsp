@@ -21,8 +21,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<style>
+.loader {
+	/* 로딩 이미지를 가운데 정렬하기 위해 */
+	text-align: center;
+	/* 일단 숨겨 놓기 */
+	display: none;
+}
+.loader svg {
+	animation: rotateAni 1s ease-out infinite;
+}
+</style>
 </head>
-
 <body>
 	<jsp:include page="../../views/include/navbar.jsp">
 		<jsp:param value="detail" name="thisPage"/>
@@ -32,6 +42,7 @@
 			<div id="simple-list-item-1" class="shop_board_top">
 				<img src="/shop/images/${dto.imagePath }" alt="" />
 			</div>
+			
 			<div class="shop_board_body1">
 				<div class="shop_board_title">
 				<br />
@@ -49,8 +60,6 @@
 							</a>
 						</div>
 					</c:if>
-					
-
 				</div>
 	
 				<div class="shop_board_info">
@@ -85,65 +94,63 @@
 									<c:if test="${reviewCount lt 30 && grade lt 4}">
 										<span style="color:gray;">* 평점이 4.0 이상(리뷰 5개 이상)이면 별 마크가, 리뷰가 50개 이상이면 리뷰 마크가 표시됩니다</span>
 									</c:if>
-								
 								</td>
 							</tr>
-							
 						</tbody>
 					</table>
 				</div>
 			</div>
+			
 			<div class="shop_board_separator"></div>
+			
 			<div class="shop_board_body2">
-					<div class="shop_board_menu">				
+				<div class="shop_board_menu">				
 					<strong>메뉴</strong>
 					<c:if test="${sessionScope.id eq 'admin'}">
-						<a
-							href="${pageContext.request.contextPath}/shop/menu_insertform?num=${dto.num}"
-							class="menu_insert btn btn-outline-warning">+</a>
+						<a href="${pageContext.request.contextPath}/shop/menu_insertform?num=${dto.num}" class="menu_insert btn btn-outline-warning">+</a>
 					</c:if>
+					
 					<ul class="shop_board_menu_list">
-							<c:forEach var="tmp" items="${menuList }">
-								<li class="menu_item">
-									<div class="menu_name_price">
-										<img src="${pageContext.request.contextPath}${tmp.imagePath}" id="${tmp.menuNum }" class="gallery" height="50px" alt="small_image" hidden/>
-										<span class="menu_name" id="/shop/images/${tmp.imagePath}" data-image="${tmp.content}" >${tmp.name}</span>
-										<span class="menu_price">${tmp.price}</span>
-										
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-	
+						<c:forEach var="tmp" items="${menuList }">
+							<li class="menu_item">
+								<div class="menu_name_price">
+									<img src="${pageContext.request.contextPath}${tmp.imagePath}" id="${tmp.menuNum }" class="gallery" height="50px" alt="small_image" hidden/>
+									<span class="menu_name" id="/shop/images/${tmp.imagePath}" data-image="${tmp.content}" >${tmp.name}</span>
+									<span class="menu_price">${tmp.price}</span>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 			
-				<script type="text/javascript">
-				    $(document).ready(function() {
-				        var xOffset = 10;
-				        var yOffset = 30;
-				        
-				        //마우스 오버시 preview 생성
-				        $(document).on("mouseover",".menu_name",function(e){
-				        	var image_data = $(this).data("image");
-				            var add_caption = (image_data != undefined) ? "<br/>" + "ℹ️" +image_data : "" ;
-				            
-				            $("body").append("<p id='preview'><img src='" + $(this).attr("id") + "' width='400px'/>"+ add_caption +"</p>");
-				            $("#preview")
-				            .css("position", "fixed")
-				            .css("top", "25%")
-				            .css("left","35%")
-				            .css("z-index", 5)
-				          	.css("border", "1px solid #cecece")
-				            .fadeIn("slow");
-				        });
-				        //마우스 아웃시 preview 제거
-				        $(document).on("mouseout",".menu_name",function(){
-				            $("#preview").remove();
-				        });
-				    });
-				</script>
+			<script type="text/javascript">
+			    $(document).ready(function() {
+			        var xOffset = 10;
+			        var yOffset = 30;
+			        
+			        //마우스 오버시 preview 생성
+			        $(document).on("mouseover",".menu_name",function(e){
+			        	var image_data = $(this).data("image");
+			            var add_caption = (image_data != undefined) ? "<br/>" + "ℹ️" +image_data : "" ;
+			            $("body").append("<p id='preview'><img src='" + $(this).attr("id") + "' width='400px'/>"+ add_caption +"</p>");
+			            $("#preview")
+			            .css("position", "fixed")
+			            .css("top", "25%")
+			            .css("left","35%")
+			            .css("z-index", 5)
+			          	.css("border", "1px solid #cecece")
+			            .fadeIn("slow");
+			        });
+			        //마우스 아웃시 preview 제거
+			        $(document).on("mouseout",".menu_name",function(){
+			            $("#preview").remove();
+			        });
+			    });
+			</script>
+			
 			<div class="shop_board_separator"></div>
+			
 			<div class="shop_board_body3">
 				<div class="shop_board_review">
 					<strong>리뷰</strong>
@@ -155,146 +162,25 @@
 										<c:when test="${grade eq 0}">
 											<td class="avg_score"><span style="color:gray; font-size:18px;">등록 된 리뷰가 없습니다</span></td>
 										</c:when>
+										
 										<c:otherwise>
 											<td class="avg_score">평점 : <span style="color : red;">${grade}</span>점</td>
 										</c:otherwise> 
 									</c:choose>
 									<div class="" style="width:250px;height:150px;float: right;position: absolute;right: 0%;" >
 								    	<div class="statistics" >
-								   		 		<canvas id="myChart" ref="acquisitions" style="display: block;box-sizing: border-box;height: 150px;width: 250px;padding: 10px;"></canvas>
+							   		 		<canvas id="myChart" ref="acquisitions" style="display: block;box-sizing: border-box;height: 150px;width: 250px;padding: 10px;"></canvas>
 								    	</div>
 								    	
 								    	<!-- 리뷰 별점 데이터 받아오기 -->
 								    	<c:forEach var="tmp" items="${testList}">
 								    		<li hidden>
 								    			<input value="${tmp.gCount}" class="score_count_${tmp.grade}"></input>
-								    		
 								    		</li>
 								    	</c:forEach>
 									</div>
 								</tr>
-								<tr>
-									<td>
-										<div class="reviews">
-											<ul>
-												<c:forEach var="tmp" items="${reviewList}">
-													<c:choose>
-														<c:when test="${tmp.deleted eq 'yes' }">
-															<dt class="row" style="border-top: 1px solid #f2f2f2; height : 75px; item-align : center; text-align:center; align-items: center;">
-																<li>삭제된 리뷰 입니다.</li>
-															</dt>
-														</c:when>
-														<c:otherwise>
-															<c:if test="${tmp.num eq tmp.review_group }">
-																<li id="reli${tmp.num }">
-															</c:if>
-	
-															<dl>
-																<dt class="row">
-																	<div class="comment_box">											
-																	<!-- 유저 프로필 -->
-																		<div class="review_profile col">
-																			<c:if test="${ empty tmp.profile }">
-																				<svg class="profile-image"
-																					xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																					fill="currentColor" class="bi bi-person-circle"
-																					viewBox="0 0 16 16">
-												                                <path
-																						d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-												                                <path fill-rule="evenodd"
-																						d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-												                              </svg>
-																			</c:if>
-																			<c:if test="${not empty tmp.profile }">
-																				<img class="profile-image"
-																					src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
-																			</c:if>
-																		</div>
-																		<span class="col">${tmp.writer }</span>
-																		<span class="bg_bar"></span>
-																		<span style="font-weight: 100; font-size : 13px; color : gray;">${tmp.regdate }</span>
-																		<c:choose>
-																			<c:when
-																				test="${ (id ne null) and (tmp.writer eq id) }">
-																				<a data-num="${tmp.num }"
-																					class="update-link btn btn-warning"
-																					href="javascript:" style="font-size : 13px; padding:0 1px;">EDIT</a>
-																				<a data-num="${tmp.num }"
-																					class="delete-link btn btn-danger"
-																					href="javascript:"  style="font-size : 13px; padding:0 1px;">DELETE</a>
-																			</c:when>
-																			<c:when test="${id eq 'admin' }">
-																				<a data-num="${tmp.num }"
-																					class="delete-link btn btn-danger"
-																					href="javascript:">DELETE</a>
-																			</c:when>
-																		</c:choose>
-																			<div class="startRadio" style="pointer-events: none;">																			
-																				<c:forEach var="i" begin="0" end="9">
-																					<label class="startRadio__box" > 
-																					<input type="radio" name="grade_number" value=${i }
-																						${tmp.grade eq (i/2+0.5) ? 'class="point"' : ''} >
-																						<span class="startRadio__img"> <span
-																							class="blind">별 ${(i/2+0.5) }개</span>
-																					</span>
-																					</label>
-																				</c:forEach>
-																			</div>
-																		<div class="comment_box" id="pre${tmp.num }">
-																			<input class="review_title_box" type="text"
-																				name="title" id="spt${tmp.num }" value="${tmp.title}"
-																				disabled />
-																			<textarea class="review_content_box"
-																			id="spc${tmp.num }" name="content" disabled>${tmp.content}</textarea>
-																		</div>
-	
-																		<!-- 수정폼 -->
-																		<c:if test="${tmp.writer eq id }">
-																			<form id="updateForm${tmp.num }"
-																				class="review-form update-form"
-																				action="review_update" method="post">
-																				<input type="hidden" name="num" value="${tmp.num }" />
-																				<div class="startRadio">
-																					<c:forEach var="i" begin="0" end="9">
-																						<label class="startRadio__box" hidden> <input
-																							type="radio" name="grade_number" value=${i }
-																							${tmp.grade eq (i/2+0.5) ? 'checked' : '' }
-																							disabled> <span class="startRadio__img">
-																								<span class="blind">별 ${(i/2+0.5) }개</span>
-																						</span>
-																						</label>
-																					</c:forEach>
-																				</div>
-	
-																				<textarea name="content">${tmp.content }</textarea>
-																				<button type="submit" id="ur${tmp.num }"
-																					class=comment_edit_btn>수정</button>
-																			</form>
-																		</c:if>
-																	</div>
-	
-																	
-																</dt>
-																<div class="col-2">
-																	<c:choose>
-																		<c:when
-																			test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
-																		</c:when>
-																		<c:otherwise>
-																			<img class="review_img"
-																				src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
-																		</c:otherwise>
-																	</c:choose>
-																</div>
-															</dl>
-														</c:otherwise>
-													</c:choose>
-												</c:forEach>
-	
-											</ul>
-										</div>
-									</td>
-								</tr>
+								
 								<tr class="comment_area">
 									<td>
 										<!-- 원글에 리뷰를 작성할 폼 -->
@@ -344,42 +230,123 @@
 										</div> 
 									</td>
 								</tr>
+								
+								<tr>
+									<td>
+										<div class="reviews">
+											<ul>
+												<c:forEach var="tmp" items="${reviewList}">
+													<c:choose>
+														<c:when test="${tmp.deleted eq 'yes' }">
+															<dt class="row" style="border-top: 1px solid #f2f2f2; height : 75px; item-align : center; text-align:center; align-items: center;">
+																<li>삭제된 리뷰 입니다.</li>
+															</dt>
+														</c:when>
+														<c:otherwise>
+															<c:if test="${tmp.num eq tmp.review_group }">
+																<li id="reli${tmp.num }">
+															</c:if>
+	
+															<dl>
+																<dt class="row">
+																	<div class="comment_box">											
+																	<!-- 유저 프로필 -->
+																		<div class="review_profile col">
+																			<c:if test="${ empty tmp.profile }">
+																				<svg class="profile-image"
+																					xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+																					fill="currentColor" class="bi bi-person-circle"
+																					viewBox="0 0 16 16">
+													                                <path
+																							d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+													                                <path fill-rule="evenodd"
+																							d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+												                              	</svg>
+																			</c:if>
+																			<c:if test="${not empty tmp.profile }">
+																				<img class="profile-image" src="${pageContext.request.contextPath}/shop/images/${tmp.profile }" />
+																			</c:if>
+																		</div>
+																		<span class="col">${tmp.writer }</span>
+																		<span class="bg_bar"></span>
+																		<span style="font-weight: 100; font-size : 13px; color : gray;">${tmp.regdate }</span>
+																		<c:choose>
+																			<c:when test="${ (id ne null) and (tmp.writer eq id) }">
+																				<a data-num="${tmp.num }" class="update-link btn btn-warning" href="javascript:" style="font-size : 13px; padding:0 1px;">EDIT</a>
+																				<a data-num="${tmp.num }" class="delete-link btn btn-danger" href="javascript:"  style="font-size : 13px; padding:0 1px;">DELETE</a>
+																			</c:when>
+																			<c:when test="${id eq 'admin' }">
+																				<a data-num="${tmp.num }" class="delete-link btn btn-danger" href="javascript:">DELETE</a>
+																			</c:when>
+																		</c:choose>
+																		
+																		<div class="startRadio" style="pointer-events: none;">
+																			<c:forEach var="i" begin="0" end="9">
+																				<label class="startRadio__box"> 
+																				<input type="radio" name="grade_number" value=${i } ${tmp.grade eq (i/2+0.5) ? 'class="point"' : ''}>
+																					<span class="startRadio__img"> 
+																						<span class="blind">별 ${(i/2+0.5) }개</span>
+																					</span>
+																				</label>
+																			</c:forEach>
+																		</div>
+																		
+																		<div class="comment_box" id="pre${tmp.num }">
+																			<input class="review_title_box" type="text" name="title" id="spt${tmp.num }" value="${tmp.title}" disabled />
+																			<textarea class="review_content_box" id="spc${tmp.num }" name="content" disabled>${tmp.content}</textarea>
+																		</div>
+	
+																		<!-- 수정폼 -->
+																		<c:if test="${tmp.writer eq id }">
+																			<form id="updateForm${tmp.num }" class="review-form update-form" action="review_update" method="post">
+																				<input type="hidden" name="num" value="${tmp.num }" />
+																				<div class="startRadio">
+																					<c:forEach var="i" begin="0" end="9">
+																						<label class="startRadio__box" hidden> 
+																						<input type="radio" name="grade_number" value=${i } ${tmp.grade eq (i/2+0.5) ? 'checked' : '' } disabled> 
+																							<span class="startRadio__img">
+																								<span class="blind">별 ${(i/2+0.5) }개</span>
+																							</span>
+																						</label>
+																					</c:forEach>
+																				</div>
+	
+																				<textarea name="content">${tmp.content }</textarea>
+																				<button type="submit" id="ur${tmp.num }" class=comment_edit_btn>수정</button>
+																			</form>
+																		</c:if>
+																	</div>
+																</dt>
+																<div class="col-2">
+																	<c:choose>
+																		<c:when test="${empty tmp.imagePath or tmp.imagePath eq 'empty' }">
+																		</c:when>
+																		<c:otherwise>
+																			<img class="review_img" src="${pageContext.request.contextPath}/shop/images/${tmp.imagePath}" />
+																		</c:otherwise>
+																	</c:choose>
+																</div>
+															</dl>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</ul>
+										</div>
+										<div class="loader">
+											<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+												<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+												<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+											</svg>
+										</div>
+									</td>
+								</tr>
 							</tbody>
 						</table>
-						<nav>
-							<ul class="pagination" style="margin:5% 4% 0 0;">
-								
-								<c:if test="${rvStartPageNum ne 1 }">
-									<li class="page-item" style="border-top:none"><a class="page-link"
-										href="detail?num=${dto.num}&rvPageNum=${rvStartPageNum - 1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
-									</li>
-								</c:if>
-								
-								<c:forEach var="i" begin="${rvStartPageNum }"
-									end="${rvEndPageNum }">
-									<li class="page-item ${rvPageNum eq i ? 'active' : '' }" style="border-top:none">
-										<a class="page-link"
-										href="detail?num=${dto.num }&rvPageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
-									</li>
-								</c:forEach>
-							
-								<c:if test="${rvEndPageNum lt rvTotalPageCount }">
-									<li class="page-item" style="border-top:none"><a class="page-link"
-										href="detail?num=${dto.num }&rvPageNum=${rvEndPageNum + 1 }&condition=${condition}&keyword=${encodedK}">Next</a>
-									</li>
-								</c:if>
-							</ul>
-						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-
-		
-
 	
 <script>
 const app = Vue.createApp({
@@ -437,60 +404,100 @@ const app = Vue.createApp({
 					legend: {
 						display: false
 						},
-					datalabels: {
-			            font: {
-			              size: 12,
-			            },
-			            display: function(context) {
-			                return context.dataset.data[context.dataIndex]>1;
-			              },
-			            anchor: 'end',
-			            align: 'right',
-			            offset: 2,
-			            formatter: function(value, context) {
-			              return value;
-			            }
-					}
-				},
-				indexAxis: 'y',
-				scales: {
-					x:{
-				        ticks: {
-				        	display: false,
-				        	stepSize: 1,
-				        },
-			            grid: {display: false},
-					},
-					y: {
-						beginAtZero: true, // y축이 0부터 시작하도록 설정
-						offset: true,
-						grid: {
-						    display: false
-					  	},
-					    ticks: {
-					        color: '#ffc107',
-					    	stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
-					    },
-					},
-				},
-				layout: {
-					padding: {
-						top: 0,
-						bottom: 0,
-						left: 0,
-						right: 20
-					},
-				},
+						],
+					});
+					// window.onload 대신에 Vue.watchEffect를 사용
+					// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
+					Vue.watchEffect(() => {
+						arr.value = [0, 0, 0, 0, 0]; // 초기화
+						console.log(arr.value[0]);
+						for (let i=1; i < 6; i++) {
+							if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
+								
+							}
+							else{
+								arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
+							}
+							
+					  	}
+						chartData.datasets[0].data = arr.value; // 데이터 갱신
+					});
+			
+					return {
+				    	chartData,
+					};
 			},
+			async mounted() {
+				const response = await fetch('http://localhost:9000/es/test', {
+					method : 'GET',
+					headers : {
+						'Content-Type' : 'application/json',
+					}
+				});
+				
+				const ctx = document.getElementById("myChart").getContext("2d");
+				const myChart = new Chart(ctx, {
+					type: "bar",
+					data: this.chartData,
+					plugins : [ChartDataLabels],
+					options: {
+						plugins: {
+							legend: {
+								display: false
+								},
+							datalabels: {
+					            font: {
+					              size: 12,
+					            },
+					            display: function(context) {
+					                return context.dataset.data[context.dataIndex]>1;
+					              },
+					            anchor: 'end',
+					            align: 'right',
+					            offset: 2,
+					            formatter: function(value, context) {
+					              return value;
+					            }
+							}
+						},
+						indexAxis: 'y',
+						scales: {
+							x:{
+						        ticks: {
+						        	display: false,
+						        	stepSize: 1,
+						        },
+					            grid: {display: false},
+							},
+							y: {
+								beginAtZero: true, // y축이 0부터 시작하도록 설정
+								offset: true,
+								grid: {
+								    display: false
+							  	},
+							    ticks: {
+							        color: '#ffc107',
+							    	stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
+							    },
+							},
+						},
+						layout: {
+							padding: {
+								top: 0,
+								bottom: 0,
+								left: 0,
+								right: 20
+							},
+						},
+					},
+				});
+				window.addEventListener('resize', function() {
+					myChart.resize();
+				});
+			  },
 		});
-		window.addEventListener('resize', function() {
-			myChart.resize();
-		});
-	  },
-});
-app.mount(".statistics");
-</script>
-
+		app.mount(".statistics");
+	</script>
 
 	<script>
 		let selector = document.getElementsByClassName("menu_price");
@@ -499,105 +506,155 @@ app.mount(".statistics");
 		}
 	</script>
 
-	
 	<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-	
 
-	
 	<!-- 리뷰 관리 script -->
 	<script>
-      document.querySelector(".insert-form")
-         .addEventListener("submit", function(e){
-            if(!isLogin){
-               e.preventDefault();
-               location.href=
-                  "${pageContext.request.contextPath}/users/loginform?url=/shop/detail?num=${dto.num}";
-            }
-      });
+		document.querySelector(".insert-form")
+			.addEventListener("submit", function(e){
+				if(!isLogin){
+				e.preventDefault();
+				location.href= "${pageContext.request.contextPath}/users/loginform?url=/shop/detail?num=${dto.num}";
+			}
+		});
       
-      //댓글에 이벤트 리스너 등록 하기 
-      addUpdateFormListener(".update-form");
-      addUpdateListener(".update-link");
-      addDeleteListener(".delete-link");
+		//댓글에 이벤트 리스너 등록 하기 
+		addUpdateFormListener(".update-form");
+		addUpdateListener(".update-link");
+		addDeleteListener(".delete-link");
        
-      function addUpdateListener(sel){
-         let updateLinks = document.querySelectorAll(sel);
-         for(let i=0; i<updateLinks.length; i++){
-            updateLinks[i].addEventListener("click", function(){
-               const num=this.getAttribute("data-num");
-               const form = document.querySelector("#updateForm"+num);
-               const form2 = document.querySelector("#pre"+num);
+		//댓글의 현재 페이지 번호를 관리할 변수를 만들고 초기값 1 대입하기
+		let currentPage=1;
+		//마지막 페이지는 totalPageCount 이다.  
+		<%-- 댓글의 개수가 0일 때 오류를 발생하지 않기 위해 --%>
+		let lastPage=${rvTotalPageCount eq 0 ? 1 : rvTotalPageCount};
+      
+		//추가로 댓글을 요청하고 그 작업이 끝났는지 여부를 관리할 변수 
+      	let isLoading=false; //현재 로딩중인지 여부 
+		
+      	window.addEventListener("scroll", function(){
+			//바닥 까지 스크롤 했는지 여부 
+            const isBottom = window.innerHeight + window.scrollY  >= document.body.offsetHeight;
+            //현재 페이지가 마지막 페이지인지 여부 알아내기
+            let isLast = currentPage == lastPage;   
+            //현재 바닥까지 스크롤 했고 로딩중이 아니고 현재 페이지가 마지막이 아니라면
+            if(isBottom && !isLoading && !isLast){
+               //로딩바 띄우기
+               document.querySelector(".loader").style.display="block";
                
-               let current = this.innerText;
+               //로딩 작업중이라고 표시
+               isLoading=true;
+               //현재 댓글 페이지를 1 증가 시키고 
+               currentPage++;
                
-               if(current == "EDIT"){
-            	   form.style.display="block";
-            	   form2.style.display="none";
-                   form.classList.add("animate__flash");
-                   this.innerText="CANCEL";   
-                   form.addEventListener("animationend", function(){
-                      form.classList.remove("animate__flash");
-                   }, {once:true});
-                   document.querySelector("#ur"+num).addEventListener("click", function(){
-                	   form2.style.display="block";	
-                	   updateLinks[i].innerText = "EDIT";
-				   });
-                 }else if(current == "CANCEL"){
-                    form.classList.add("animate__fadeOut");
-                    this.innerText="EDIT";
-                    form.addEventListener("animationend", function(){
-                       form.classList.remove("animate__fadeOut");
-                       form.style.display="none";
-                       form2.style.display="block";
-                    },{once:true});
-               }
-            });
-         }
-      }
-      function addDeleteListener(sel){
-         let deleteLinks=document.querySelectorAll(sel);
-         for(let i=0; i<deleteLinks.length; i++){
-            deleteLinks[i].addEventListener("click", function(){
-               const num=this.getAttribute("data-num");
-               const isDelete=confirm("리뷰를 삭제 하시겠습니까?");
-               if(isDelete){
-                  ajaxPromise("review_delete", "post", "num="+num)
-                  .then(function(response){
-                     return response.json();
-                  })
-                  .then(function(data){
-                     if(data.isSuccess){
-                        document.querySelector("#reli"+num).innerText="삭제된 리뷰입니다.";
-                     }
-                  });
-               }
-            });
-         }
-      }
-       
-      function addUpdateFormListener(sel){
-         let updateForms=document.querySelectorAll(sel);
-         for(let i=0; i<updateForms.length; i++){
-            updateForms[i].addEventListener("submit", function(e){
-               const form=this;
-               e.preventDefault();
-               ajaxFormPromise(form)
+               /*
+                  해당 페이지의 내용을 ajax 요청을 통해서 받아온다.
+                  "pageNum=xxx&num=xxx" 형식으로 GET 방식 파라미터를 전달한다. 
+               */
+               ajaxPromise("ajax_review_list","get", "pageNum="+currentPage+"&num=${dto.num}")
                .then(function(response){
-                  return response.json();
+                  //json 이 아닌 html 문자열을 응답받았기 때문에  return response.text() 해준다.
+                  return response.text();
                })
                .then(function(data){
-                  if(data.isSuccess){
-                     const num = form.querySelector("input[name=num]").value;
-                     const content = form.querySelector("textarea[name=content]").value;
-                     document.querySelector("#spc"+num).innerText=content;
-                     form.style.display="none";
-                  }
+                  //data 는 html 형식의 문자열이다. 
+                  console.log(data);
+                  // beforebegin | afterbegin | beforeend | afterend
+                  document.querySelector(".reviews ul")
+                     .insertAdjacentHTML("beforeend", data);
+                  //로딩이 끝났다고 표시한다.
+                  isLoading=false;
+                  //새로 추가된 댓글 li 요소 안에 있는 a 요소를 찾아서 이벤트 리스너 등록 하기 
+                  addUpdateListener(".page-"+currentPage+" .update-link");
+                  addDeleteListener(".page-"+currentPage+" .delete-link");
+                  //새로 추가된 댓글 li 요소 안에 있는 댓글 수정폼에 이벤트 리스너 등록하기
+                  addUpdateFormListener(".page-"+currentPage+" .update-form");
+                  
+                  //로딩바 숨기기
+                  document.querySelector(".loader").style.display="none";
                });
-            });
-         }
-      }
+            }
+         });
+      	
+		function addUpdateListener(sel){
+			let updateLinks = document.querySelectorAll(sel);
+			for(let i=0; i<updateLinks.length; i++){
+				updateLinks[i].addEventListener("click", function(){
+					const num=this.getAttribute("data-num");
+					const form = document.querySelector("#updateForm"+num);
+					const form2 = document.querySelector("#pre"+num);
+               
+					let current = this.innerText;
+               
+					if(current == "EDIT"){
+						form.style.display="block";
+						form2.style.display="none";
+						form.classList.add("animate__flash");
+						this.innerText="CANCEL";   
+						form.addEventListener("animationend", function(){
+							form.classList.remove("animate__flash");
+						}, {once:true});
+						document.querySelector("#ur"+num).addEventListener("click", function(){
+							form2.style.display="block";	
+							updateLinks[i].innerText = "EDIT";
+						});
+					}else if(current == "CANCEL"){
+						form.classList.add("animate__fadeOut");
+                    	this.innerText="EDIT";
+                    		form.addEventListener("animationend", function(){
+                       		form.classList.remove("animate__fadeOut");
+                       		form.style.display="none";
+                       		form2.style.display="block";
+                    		},{once:true});
+               		}
+				});
+			}
+		}
+		
+		function addDeleteListener(sel){
+			let deleteLinks=document.querySelectorAll(sel);
+			for(let i=0; i<deleteLinks.length; i++){
+				deleteLinks[i].addEventListener("click", function(){
+					const num=this.getAttribute("data-num");
+					const isDelete=confirm("리뷰를 삭제 하시겠습니까?");
+					if(isDelete){
+						ajaxPromise("review_delete", "post", "num="+num)
+						.then(function(response){
+							return response.json();
+						})
+						.then(function(data){
+							if(data.isSuccess){
+								document.querySelector("#reli"+num).innerText="삭제된 리뷰입니다.";
+							}
+						});
+					}
+				});
+			}
+		}
+       
+		function addUpdateFormListener(sel){
+			let updateForms=document.querySelectorAll(sel);
+			for(let i=0; i<updateForms.length; i++){
+				updateForms[i].addEventListener("submit", function(e){
+					const form=this;
+					e.preventDefault();
+					ajaxFormPromise(form)
+					.then(function(response){
+						return response.json();
+					})
+					.then(function(data){
+						if(data.isSuccess){
+							const num = form.querySelector("input[name=num]").value;
+							const content = form.querySelector("textarea[name=content]").value;
+							document.querySelector("#spc"+num).innerText=content;
+							form.style.display="none";
+						}
+					});
+				});
+			}
+		}
       
-      document.querySelector("#thumbnailLink").addEventListener("click", function(){
+		document.querySelector("#thumbnailLink").addEventListener("click", function(){
 			document.querySelector("#image").click();	
 		});   
 		document.querySelector("#image").addEventListener("change", function(){

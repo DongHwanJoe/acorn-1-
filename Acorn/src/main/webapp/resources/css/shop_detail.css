@@ -340,7 +340,7 @@ button:hover {
 .regist_comment_box:focus{
 }
 .comment_form_box{
-    height: 170px; 
+    height: 100%; 
     width: 100%;
     background-color: white;
 	text-align : left;

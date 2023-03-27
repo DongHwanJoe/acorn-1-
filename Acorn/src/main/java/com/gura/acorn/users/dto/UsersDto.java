@@ -4,7 +4,6 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("usersDto")
 public class UsersDto {
-	//필드
 	private String id;
 	private String pwd;
 	private String email;
@@ -19,7 +18,6 @@ public class UsersDto {
     private int prevNum; // 이전 글의 번호
     private int nextNum; // 다음 글의 번호
 	
-	//디폴트 생성자
 	public UsersDto() {}
 
 	public UsersDto(String id, String pwd, String email, String profile, String regdate, String ban, String newPwd, String isSave, String loggedIn, int startRowNum, int endRowNum, int prevNum, int nextNum) {
@@ -142,6 +140,4 @@ public class UsersDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-
-	
 }

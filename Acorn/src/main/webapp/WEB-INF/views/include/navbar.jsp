@@ -18,13 +18,7 @@
 					<c:if test="${param.thisPage eq 'index' }">
 						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
 					</c:if>
-<<<<<<< HEAD
-					<a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  }
-						id="STATISTICS">STATISTICS</a>
-=======
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">RESEARCH</a>
->>>>>>> refs/remotes/upstream/master
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">STATISTIC</a>
 				</div>
 				
 				<div class="search_menu">
@@ -53,24 +47,13 @@
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-<<<<<<< HEAD
-				<div id="simple-list-example"
-					class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
-						id="category">CATEGORY</a>
-					<c:if test="${param.thisPage eq 'index' }">
-						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
-					</c:if>
-					<a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
-						id="STATISTICS">STATISTICS</a>
-=======
 				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
 					<a href="#simple-list-item-1">TOP</a> 
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">RESEARCH</a>
->>>>>>> refs/remotes/upstream/master
+					<c:if test="${param.thisPage eq 'index' }">
+						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
+					</c:if>
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTIC</a>
 				</div>
 				
 				<div class="search_menu">
@@ -101,13 +84,10 @@
 				<p class="cloud_effect">FOOD CLOUD</p>
 			</a>
 			<div class="top_menu">
-				<div id="simple-list-example"
-					class="top_nav simple-list-example-scrollspy">
-					<a href="#simple-list-item-1">TOP</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" }
-						id="category">CATEGORY</a> <a
-						href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" }
-						id="STATISTICS">STATISTICS</a>
+				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
+					<a href="#simple-list-item-1">TOP</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTIC</a>
 				</div>
 				
 				<div class="search_menu">

@@ -85,8 +85,8 @@ textarea {
 			method="get" id="insertForm">
 
 			<!-- 실제 폼에 제출될 이미지 값 -->
-			<input type="hidden" name="imagePath" value="empty" id="image2" /> <input
-				type="hidden" name="num" value="${param.num }" />
+			<input type="hidden" name="imagePath" value="empty" id="image2" /> 
+			<input type="hidden" name="num" value="${param.num }" />
 
 			<!-- 메뉴명 input -->
 			<div class="mb-3">
@@ -108,9 +108,8 @@ textarea {
 					style="top: -130px; position: relative;">설명</label>
 
 				<!-- 섬네일 등록을 위해 클릭할 이미지 -->
-				<a id="thumbnailLink" href="javascript:"> <img
-					src="${pageContext.request.contextPath}/resources/images/photo.png"
-					alt="" class="upload_img" />
+				<a id="thumbnailLink" href="javascript:"> 
+					<img src="${pageContext.request.contextPath}/resources/images/photo.png" alt="" class="upload_img" />
 				</a>
 
 				<textarea class="form-control" name="content" id="content"></textarea>
@@ -119,19 +118,15 @@ textarea {
 		</form>
 
 		<!-- 이미지 등록용 숨겨진 form -->
-		<form id="imageForm"
-			action="${pageContext.request.contextPath}/shop/image_upload"
-			method="post" enctype="multipart/form-data">
-			프로필 사진 <input type="file" id="image" name="image"
-				accept=".jpg, .png, .gif, .jpeg" />
+		<form id="imageForm" action="${pageContext.request.contextPath}/shop/image_upload" method="post" enctype="multipart/form-data">
+			프로필 사진 
+			<input type="file" id="image" name="image" accept=".jpg, .png, .gif, .jpeg" />
 			<button type="submit">업로드</button>
 		</form>
 	</div>
 
-	<script
-		src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 	<!-- 이미지 등록 script -->
 	<script>

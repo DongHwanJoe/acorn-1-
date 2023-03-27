@@ -227,6 +227,20 @@ public class ShopController {
 		return "redirect:/shop/detail?num="+ref_group;
 	}
 	
+	//리뷰 더보기 요청 처리
+	@RequestMapping("/shop/ajax_review_list")
+	public String moreReviewList(HttpServletRequest request) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		service.moreReviewList(request);
+
+		return "shop/ajax_review_list";
+	}
+	
 	//리뷰 삭제
 	@RequestMapping("/shop/review_delete")
 	@ResponseBody

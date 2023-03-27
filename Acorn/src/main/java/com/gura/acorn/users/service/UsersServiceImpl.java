@@ -43,6 +43,7 @@ public class UsersServiceImpl implements UsersService{
 		map.put("isExist", isExist);
 		return map;
 	}
+	
 	//회원 한명의 정보를 추가하는 메소드
 	@Override
 	public void addUser(UsersDto dto) {
@@ -56,6 +57,7 @@ public class UsersServiceImpl implements UsersService{
 		//암호화된 비밀번호가 들어 있는 dto 를 dao 에 전달해서 새로운 회원 정보를 추가 한다.
 		dao.insert(dto);
 	}
+	
 	//로그인 처리를 하는 메소드
 	@Override
 	public void loginProcess(UsersDto dto, HttpSession session, HttpServletResponse response) {
@@ -63,7 +65,6 @@ public class UsersServiceImpl implements UsersService{
 		boolean isValid=false;
 		//아이디를 이용해서 회원 정보를 얻어온다.
 		UsersDto resultDto=dao.getData(dto.getId());
-		
 		
 		//만일 select 된 회원 정보가 존재하고 
 		if(resultDto != null) {
@@ -97,6 +98,7 @@ public class UsersServiceImpl implements UsersService{
 				}
 			}
 		}
+		
 		// 로그인 정보를 저장하기로 했는지 확인해서 저장하기로 했다면 쿠키로 응답한다.
 		String isSave = dto.getIsSave();
 	      if(isSave == null){ // 체크 박스를 체크 안했다면

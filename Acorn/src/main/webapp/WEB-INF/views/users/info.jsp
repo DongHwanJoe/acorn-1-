@@ -71,11 +71,11 @@ a {
 }
 </style>
 </head>
-<body class="text-center">
+<body>
 	<jsp:include page="../../views/include/navbar.jsp">
 		<jsp:param value="user04" name="thisPage"/>
 	</jsp:include>
-	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+	<div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example text-center" tabindex="0">
 	<div id="simple-list-item-1" class="container">
 		<br /><br />
 		<h1>INFO</h1>
@@ -147,6 +147,8 @@ a {
 			method="post">
 			<input type="hidden" name="profile"
 				value="${ empty dto.profile ? 'empty' : dto.profile }" />
+			<input type="hidden" name="loggedIn" 
+				value="${dto.loggedIn }" />
 			<div>
 				<label for="id">아이디</label> <input type="text" id="id"
 					value="${dto.id }" disabled />
