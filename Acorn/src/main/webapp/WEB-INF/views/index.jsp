@@ -71,31 +71,31 @@
 			</div>
 			<div class="row">
 				<a href="${pageContext.request.contextPath}/shop/list"> 
-					<img src="${pageContext.request.contextPath}/resources/images/category/all.jpg" alt="전체" title="전체" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/all.jpg" alt="전체" title="전체" class="col" /><br/>전체
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=한식">
-					<img src="${pageContext.request.contextPath}/resources/images/category/hansik.jpg" alt="한식" title="한식" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/hansik.jpg" alt="한식" title="한식" class="col" /><br/>한식
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=중식">
-					<img src="${pageContext.request.contextPath}/resources/images/category/jungsik.jpg" alt="중식" title="중식" class="col" /> 
+					<img src="${pageContext.request.contextPath}/resources/images/category/jungsik.jpg" alt="중식" title="중식" class="col"/><br/>중식
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=일식">
-					<img src="${pageContext.request.contextPath}/resources/images/category/ilsik.jpg" alt="일식" title="일식" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/ilsik.jpg" alt="일식" title="일식" class="col"/><br/>일식
 				</a>
 			</div>
 			
 			<div class="row">
 				<a href="${pageContext.request.contextPath}/shop/list?category=분식">
-					<img src="${pageContext.request.contextPath}/resources/images/category/bunsik.jpg" alt="분식" title="분식" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/bunsik.jpg" alt="분식" title="분식" class="col"/><br/>분식
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=양식">
-					<img src="${pageContext.request.contextPath}/resources/images/category/yangsik.jpg" alt="양식" title="양식" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/yangsik.jpg" alt="양식" title="양식" class="col"/><br/>양식
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=패스트푸드">
-					<img src="${pageContext.request.contextPath}/resources/images/category/fastfood.jpg" alt="패스트푸드" title="패스트푸드" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/fastfood.jpg" alt="패스트푸드" title="패스트푸드" class="col"/><br/>패스트푸드
 				</a> 
 				<a href="${pageContext.request.contextPath}/shop/list?category=기타">
-					<img src="${pageContext.request.contextPath}/resources/images/category/guitar.jpg" alt="기타" title="기타" class="col" />
+					<img src="${pageContext.request.contextPath}/resources/images/category/guitar.jpg" alt="기타" title="기타" class="col"/><br/>기타
 				</a>
 			</div>
 		</div>
