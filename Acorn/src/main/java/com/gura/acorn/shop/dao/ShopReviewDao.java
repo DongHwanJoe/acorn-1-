@@ -27,4 +27,6 @@ public interface ShopReviewDao {
 	public List<ShopReviewDto> getReviewList(ShopReviewDto dto);
 	
 	public List<ShopReviewDto> test(int num);
+	
+	public void delete2(int num);
 }

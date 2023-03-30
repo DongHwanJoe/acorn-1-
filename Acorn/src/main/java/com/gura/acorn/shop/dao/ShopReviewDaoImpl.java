@@ -68,4 +68,9 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
 	public List<ShopReviewDto> test(int num) {
 		return session.selectList("shopReview.test", num);
 	}
+	
+	@Override
+	public void delete2(int num) {
+		session.delete("shopReview.delete2", num);
+	}
 }

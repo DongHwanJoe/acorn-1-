@@ -8,4 +8,5 @@ public interface ShopMenuDao {
 	public List<ShopMenuDto> getList(int num);
 	public int getCount(int num);
 	public void insert(ShopMenuDto dto);
+	public void delete2(int num);
 }

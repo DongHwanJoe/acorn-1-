@@ -31,4 +31,8 @@ public class ShopMenuDaoImpl implements ShopMenuDao{
 		session.insert("shopMenu.insert", dto);
 	}
 
+	@Override
+	public void delete2(int num) {
+		session.delete("shopMenu.delete2", num);
+	}
 }
