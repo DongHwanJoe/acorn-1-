@@ -13,6 +13,11 @@
 		where menuNum=#{menuNum}
 	</delete>
 	
+	<delete id="delete2" parameterType="int">
+		delete from board_shop_menu
+		where num=#{num}
+	</delete>
+	
 	<select id="getCount" parameterType="shopMenuDto" resultType="int">
       SELECT NVL(MAX(ROWNUM), 0)
       FROM board_shop_menu

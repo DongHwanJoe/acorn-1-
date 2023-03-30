@@ -66,6 +66,11 @@
 		WHERE num = #{num}
 	</update>
 	
+	<delete id="delete2" parameterType="int">
+		delete from board_shop_review
+		where ref_group=#{ref_group}
+	</delete>
+	
 	<!-- 리뷰 저장할 때 가게글의 글번호도 미리 ShopReviewDto 객체에 담아와야 한다. -->
 	<insert id="insert" parameterType="shopReviewDto">
 		INSERT INTO board_shop_review

@@ -231,6 +231,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void deleteContent(int num, HttpServletRequest request) {
 		shopDao.delete(num);
+		shopReviewDao.delete2(num);
+		shopMenuDao.delete2(num);
 	}
 
 	@Override
