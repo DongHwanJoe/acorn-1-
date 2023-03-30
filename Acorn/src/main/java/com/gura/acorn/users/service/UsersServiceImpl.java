@@ -232,7 +232,7 @@ public class UsersServiceImpl implements UsersService{
 		final int PAGE_DISPLAY_COUNT = 5;
 		// 보여줄 페이지의 번호를 일단 1이라고 초기값 지정
 		int pageNum = 1;
-		
+
 		// 페이지 번호가 파라미터로 전달되는지 읽어와 본다.
 		String strPageNum = request.getParameter("pageNum");
 		// 만일 페이지 번호가 파라미터로 넘어 온다면
@@ -244,10 +244,30 @@ public class UsersServiceImpl implements UsersService{
 		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 		// 보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
+
 		// UsersDto 객체에 startRowNum 과 endRowNum 을 담는다.
 		UsersDto dto = new UsersDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
+
+		/*
+		 * [ 검색 키워드에 관련된 처리 ] - 검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.
+		 */
+		String keyword = request.getParameter("keyword");
+		// 만일 키워드가 넘어오지 않는다면
+		if (keyword == null) {
+			// 키워드와 검색 조건에 빈 문자열을 넣어준다.
+			// 클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서
+			keyword = "";
+		}
+
+		// 특수기호를 인코딩한 키워드를 미리 준비한다.
+		String encodedK = URLEncoder.encode(keyword);
+
+		// 만일 검색 키워드가 넘어온다면
+		if (!keyword.equals("")) {
+			dto.setId(encodedK);
+		}
 		// 유저 목록을 select 해 온다.
 		List<UsersDto> list = dao.getList(dto);
 		// 전체 유저 수
@@ -262,13 +282,14 @@ public class UsersServiceImpl implements UsersService{
 		if (endPageNum > totalPageCount) {
 			endPageNum = totalPageCount; // 보정해 준다.
 		}
-		
+
 		// 응답에 필요한 데이터를 viewPage 에 전달하기 위해 request Scope 에 담는다.
 		request.setAttribute("list", list);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
 		request.setAttribute("totalPageCount", totalPageCount);
+		request.setAttribute("encodedK", encodedK);
 		request.setAttribute("totalRow", totalRow);
 	}
 	
