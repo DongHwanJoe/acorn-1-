@@ -130,23 +130,18 @@ ul{
 			</c:choose>
 	      </ul>
 	   </nav>
-      
-      <!-- 검색 폼 -->
-      <form action="list" method="get"> 
-         <select name="condition" id="condition" style="display:none;">
-            <option value="id" ${condition eq 'id' ? 'selected' : '' }>아이디</option>
-         </select>
-         
-         <input type="text" name="keyword" placeholder="검색어 입력..." value="${keyword }"/>
-         <button type="submit" style="border-radius : 5px;">검색</button>
-      </form>
-      <c:if test="${not empty condition }">
-         <p>
-            <strong>${totalRow }</strong> 개의 자료가 검색 되었습니다.
-            <a href="list">리셋</a>
-         </p>
-      </c:if>
-   </div>
+			<!-- 검색 폼 -->
+			<form action="list" method="get">
+				<input type="text" name="keyword" placeholder="검색어 입력..."
+					value="${encodedK }" />
+				<button type="submit" style="border-radius: 5px;">검색</button>
+			</form>
+			<c:if test="${not empty encodedK }">
+				<p>
+					<strong>${totalRow }</strong> 개의 자료가 검색 되었습니다. <a href="list">리셋</a>
+				</p>
+			</c:if>
+		</div>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
    <script>
       function ban(id){
