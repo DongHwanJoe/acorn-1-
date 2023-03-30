@@ -92,7 +92,7 @@
 										<p class="best_store btn btn-success">✏️30↑</p>
 									</c:if>
 									<c:if test="${reviewCount lt 30 && grade lt 4}">
-										<span style="color:gray;">* 평점이 4.0 이상(리뷰 5개 이상)이면 별 마크가, 리뷰가 50개 이상이면 리뷰 마크가 표시됩니다</span>
+										<span style="color:gray;">* 평점이 4.0 이상(리뷰 5개 이상)이면 별 마크가, 리뷰가 30개 이상이면 리뷰 마크가 표시됩니다</span>
 									</c:if>
 								</td>
 							</tr>
@@ -174,7 +174,7 @@
 								    	
 								    	<!-- 리뷰 별점 데이터 받아오기 -->
 								    	<c:forEach var="tmp" items="${testList}">
-								    		<li>
+								    		<li hidden>
 								    			<input value="${tmp.gCount}" class="score_count_${tmp.grade}"></input>
 								    		</li>
 								    	</c:forEach>
@@ -350,154 +350,114 @@
 	
 <script>
 const app = Vue.createApp({
-	setup() {
-		const arr = Vue.ref([0, 0, 0, 0, 0]); // arr를 ref로 만들어서 반응성을 추가
-		const chartData = Vue.reactive({
-				labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
-				datasets: [{
-					label: "리뷰 별점 수",
-					axis: 'y',
-					barThickness: 10,
-					backgroundColor: "rgba(255, 99, 132, 0.2)",
-					borderColor: "rgba(255,99,132,1)",
-					borderWidth: 1,
-					data: arr.value, // arr의 값을 참조
-				},
-				],
-			});
-			// window.onload 대신에 Vue.watchEffect를 사용
-			// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
-			Vue.watchEffect(() => {
-				arr.value = [0, 0, 0, 0, 0]; // 초기화
-				console.log(arr.value[0]);
-				for (let i=1; i < 6; i++) {
-					if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
-						
-					}
-					else{
-						arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
-					}
-					
-			  	}
-				chartData.datasets[0].data = arr.value; // 데이터 갱신
-			});
-	
-			return {
-		    	chartData,
-			};
-	},
-	async mounted() {
-		const response = await fetch('http://localhost:9000/es/test', {
-			method : 'GET',
-			headers : {
-				'Content-Type' : 'application/json',
-			}
-		});
-		
-		const ctx = document.getElementById("myChart").getContext("2d");
-		const myChart = new Chart(ctx, {
-			type: "bar",
-			data: this.chartData,
-			plugins : [ChartDataLabels],
-			options: {
-				plugins: {
-					legend: {
-						display: false
-						},
-						
-					});
-					// window.onload 대신에 Vue.watchEffect를 사용
-					// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
-					Vue.watchEffect(() => {
-						arr.value = [0, 0, 0, 0, 0]; // 초기화
-						console.log(arr.value[0]);
-						for (let i=1; i < 6; i++) {
-							if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
-								
-							}
-							else{
-								arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
-							}
-							
-					  	}
-						chartData.datasets[0].data = arr.value; // 데이터 갱신
-					});
-			
-					return {
-				    	chartData,
-					};
-			},
-			async mounted() {
-				const response = await fetch('http://localhost:9000/es/test', {
-					method : 'GET',
-					headers : {
-						'Content-Type' : 'application/json',
-					}
-				});
-				
-				const ctx = document.getElementById("myChart").getContext("2d");
-				const myChart = new Chart(ctx, {
-					type: "bar",
-					data: this.chartData,
-					plugins : [ChartDataLabels],
-					options: {
-						plugins: {
-							legend: {
-								display: false
-								},
-							datalabels: {
-					            font: {
-					              size: 12,
-					            },
-					            display: function(context) {
-					                return context.dataset.data[context.dataIndex]>1;
-					              },
-					            anchor: 'end',
-					            align: 'right',
-					            offset: 2,
-					            formatter: function(value, context) {
-					              return value;
-					            }
-							}
-						},
-						indexAxis: 'y',
-						scales: {
-							x:{
-						        ticks: {
-						        	display: false,
-						        	stepSize: 1,
-						        },
-					            grid: {display: false},
-							},
-							y: {
-								beginAtZero: true, // y축이 0부터 시작하도록 설정
-								offset: true,
-								grid: {
-								    display: false
-							  	},
-							    ticks: {
-							        color: '#ffc107',
-							    	stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
-							    },
-							},
-						},
-						layout: {
-							padding: {
-								top: 0,
-								bottom: 0,
-								left: 0,
-								right: 20
-							},
-						},
-					},
-				});
-				window.addEventListener('resize', function() {
-					myChart.resize();
-				});
-			  },
-		});
-		app.mount(".statistics");
-	</script>
+   setup() {
+      const arr = Vue.ref([0, 0, 0, 0, 0]); // arr를 ref로 만들어서 반응성을 추가
+      const chartData = Vue.reactive({
+            labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
+            datasets: [{
+               label: "리뷰 별점 수",
+               axis: 'y',
+               barThickness: 10,
+               backgroundColor: "rgba(255, 99, 132, 0.2)",
+               borderColor: "rgba(255,99,132,1)",
+               borderWidth: 1,
+               data: arr.value, // arr의 값을 참조
+            },
+            ],
+         });
+         // window.onload 대신에 Vue.watchEffect를 사용
+         // arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경
+         Vue.watchEffect(() => {
+            arr.value = [0, 0, 0, 0, 0]; // 초기화
+            console.log(arr.value[0]);
+            for (let i=1; i < 6; i++) {
+               if(document.getElementsByClassName("score_count_"+i+".0")[0]==null){
+                  
+               }
+               else{
+                  arr.value[i-1] = Number(document.getElementsByClassName("score_count_"+i+".0")[0].value);
+               }
+               
+              }
+            chartData.datasets[0].data = arr.value; // 데이터 갱신
+         });
+   
+         return {
+             chartData,
+         };
+   },
+
+         async mounted() {
+            const response = await fetch('http://localhost:9000/es/test', {
+               method : 'GET',
+               headers : {
+                  'Content-Type' : 'application/json',
+               }
+            });
+            
+            const ctx = document.getElementById("myChart").getContext("2d");
+            const myChart = new Chart(ctx, {
+               type: "bar",
+               data: this.chartData,
+               plugins : [ChartDataLabels],
+               options: {
+                  plugins: {
+                     legend: {
+                        display: false
+                        },
+                     datalabels: {
+                           font: {
+                             size: 12,
+                           },
+                           display: function(context) {
+                               return context.dataset.data[context.dataIndex]>1;
+                             },
+                           anchor: 'end',
+                           align: 'right',
+                           offset: 2,
+                           formatter: function(value, context) {
+                             return value;
+                           }
+                     }
+                  },
+                  indexAxis: 'y',
+                  scales: {
+                     x:{
+                          ticks: {
+                             display: false,
+                             stepSize: 1,
+                          },
+                           grid: {display: false},
+                     },
+                     y: {
+                        beginAtZero: true, // y축이 0부터 시작하도록 설정
+                        offset: true,
+                        grid: {
+                            display: false
+                          },
+                         ticks: {
+                             color: '#ffc107',
+                            stepSize: 10, // 레이블의 높이를 줄이기 위해 값을 높임
+                         },
+                     },
+                  },
+                  layout: {
+                     padding: {
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 20
+                     },
+                  },
+               },
+            });
+            window.addEventListener('resize', function() {
+               myChart.resize();
+            });
+           },
+      });
+      app.mount(".statistics");
+  </script>
 
 	<script>
 		let selector = document.getElementsByClassName("menu_price");

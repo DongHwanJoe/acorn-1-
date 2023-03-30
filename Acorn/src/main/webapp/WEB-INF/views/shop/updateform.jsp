@@ -50,7 +50,7 @@ button {
 			<form action="${pageContext.request.contextPath}/shop/update"
 				method="Get" id="updateForm">
 				<!-- 숨겨진 imageform을 통해 등록된 이미지를 폼에 제출할 수 있도록 하는 hidden input -->
-				<input type="hidden" name="imagePath" value="${ empty dto.imagePath ? 'empty' : dto.imagePath }" /> 
+				<input type="hidden" name="imagePath" id="imagePath" value="${ empty dto.imagePath ? 'empty' : dto.imagePath }" /> 
 				<input type="hidden" name="num" value="${dto.num }" /> 
 				<br />
 				
@@ -180,7 +180,6 @@ button {
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 	<script>
-		isImageValid = false;
 
 		//프로필 이미지 링크를 클릭하면 
 		document.querySelector("#profileLink").addEventListener("click",
@@ -211,7 +210,7 @@ button {
 		});
 		
 		$("#updateForm").on("submit", function(){
-			const isNull = ($("#title").val()!="") && ($("#categorie").val()!="") && ($("#telNum").val()!="") && ($("#addr").val()!="") && ($("#startTime").val()!="") && ($("#endTime").val()!="") && isImageValid;
+			const isNull = ($("#title").val()!="") && ($("#categorie").val()!="") && ($("#telNum").val()!="") && ($("#addr").val()!="") && ($("#startTime").val()!="") && ($("#endTime").val()!="") && ($("#imagePath".val()!="empty");
 			if(!isNull){
 			     return false;
 			}

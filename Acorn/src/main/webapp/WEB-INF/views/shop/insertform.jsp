@@ -101,7 +101,7 @@ body::-webkit-scrollbar-thumb {
 					<label class=" form-label" for="startTime">개점 시간</label>			
 				</div>
 				<div class = "col-8">
-					<input	class="form-control" type="time" name="startTime" id="startTime" value="00:00" max="12:59"/>
+					<input	class="form-control" type="time" name="startTime" id="startTime" value="00:00"/>
 				</div>
 			</div>
 			<br/>
@@ -110,7 +110,7 @@ body::-webkit-scrollbar-thumb {
 					<label	class="form-label" for="endTime">폐점 시간</label> 	
 				</div>
 				<div class = "col-8">
-					<input	class="form-control" type="time" name="endTime" id="endTime" value="00:00" max="12:59" />
+					<input	class="form-control" type="time" name="endTime" id="endTime" value="00:00"/>
 				</div>
 			</div>
 			<br />

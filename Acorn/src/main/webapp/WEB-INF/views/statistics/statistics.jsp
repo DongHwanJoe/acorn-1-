@@ -232,7 +232,7 @@ const app = Vue.createApp({
 		document.getElementById("tpv").innerText = viewObject[2].PVTotalCount;
 		document.getElementById("dpv").innerText = viewObject[1].PVDayCount;
 		document.getElementById("pvTopTitle").innerText = Object.keys(viewObject[0][Object.keys(viewObject[0])[11]])[7];
-		document.getElementById("pvTopTitle").setAttribute("href", "http://localhost:9000/shop/detail?num=" + viewObject[0][Object.keys(viewObject[0])[11]].storeId + "&keyword=");
+		document.getElementById("pvTopTitle").setAttribute("href", "${pageContext.request.contextPath}/shop/detail?num=" + viewObject[0][Object.keys(viewObject[0])[11]].storeId + "&keyword=");
 
 		
 		for(var i=0; i<12; i++){
