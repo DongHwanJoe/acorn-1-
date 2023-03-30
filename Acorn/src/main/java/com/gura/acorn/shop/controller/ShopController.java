@@ -217,7 +217,7 @@ public class ShopController {
 			throw new loginException("needAuthority");
 		}
 		service.deleteContent(num, request);
-		return "redirect:/";
+		return "redirect:/shop/list";
 	}
 	
 	//리뷰 작성
