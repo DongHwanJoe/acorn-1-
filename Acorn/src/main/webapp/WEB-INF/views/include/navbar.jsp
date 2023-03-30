@@ -55,7 +55,7 @@
 					</c:if>
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTICS</a>
 				</div>
-				
+				 
 				<div class="search_menu">
 					<div class="search_bar">
 						<form action="${pageContext.request.contextPath}/search/search" method="post">
