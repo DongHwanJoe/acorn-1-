@@ -174,7 +174,7 @@
 								    	
 								    	<!-- 리뷰 별점 데이터 받아오기 -->
 								    	<c:forEach var="tmp" items="${testList}">
-								    		<li hidden>
+								    		<li>
 								    			<input value="${tmp.gCount}" class="score_count_${tmp.grade}"></input>
 								    		</li>
 								    	</c:forEach>
@@ -404,7 +404,7 @@ const app = Vue.createApp({
 					legend: {
 						display: false
 						},
-						],
+						
 					});
 					// window.onload 대신에 Vue.watchEffect를 사용
 					// arr의 값이 변경될 때마다 chartData.datasets[0].data도 변경

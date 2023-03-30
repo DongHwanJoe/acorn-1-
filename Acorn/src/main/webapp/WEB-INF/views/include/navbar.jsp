@@ -18,7 +18,7 @@
 					<c:if test="${param.thisPage eq 'index' }">
 						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
 					</c:if>
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">STATISTIC</a>
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics"  } id="research">STATISTICS</a>
 				</div>
 				
 				<div class="search_menu">
@@ -53,7 +53,7 @@
 					<c:if test="${param.thisPage eq 'index' }">
 						<a href="#simple-list-item-3" id="hot_place">HOT PLACE</a>
 					</c:if>
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTIC</a>
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTICS</a>
 				</div>
 				
 				<div class="search_menu">
@@ -87,7 +87,7 @@
 				<div id="simple-list-example" class="top_nav simple-list-example-scrollspy">
 					<a href="#simple-list-item-1">TOP</a> 
 					<a href=${param.thisPage eq "index" ? "#simple-list-item-2" : "../shop/list" } id="category">CATEGORY</a> 
-					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTIC</a>
+					<a href=${param.thisPage eq "index" ? "#simple-list-item-4" : "../statistics/statistics" } id="research">STATISTICS</a>
 				</div>
 				
 				<div class="search_menu">
@@ -278,12 +278,12 @@
         }else if(text.includes(myId+':')){
         	const messageElement = document.createElement('div');
         	messageElement.setAttribute("class",  "chatUser_"+myId);
-        	messageElement.setAttribute("style", "background-color:#FFFED7 ;border: 1px solid #c9c9c9;padding: 5px;text-align: left;border-radius: 5px;padding-top: 5px;width: 200px;float: right;display: block;margin-bottom: 10px;");
+        	messageElement.setAttribute("style", "word-wrap:break-word; background-color:#FFFED7 ;border: 1px solid #c9c9c9;padding: 5px;text-align: left;border-radius: 5px;padding-top: 5px;width: 200px;float: right;display: block;margin-bottom: 10px;");
         	messageElement.innerText = text;
             chatBox.appendChild(messageElement);
         }else{
         	const messageElement = document.createElement('div');
-        	messageElement.setAttribute("style", "background-color:#E0FFDB; margin-left:5px;border: 1px solid #c9c9c9;padding: 5px;text-align: left;border-radius: 5px;padding-top: 5px;width: 200px;float: left;display: block;margin-bottom: 10px;");
+        	messageElement.setAttribute("style", "word-wrap:break-word; background-color:#E0FFDB; margin-left:5px;border: 1px solid #c9c9c9;padding: 5px;text-align: left;border-radius: 5px;padding-top: 5px;width: 200px;float: left;display: block;margin-bottom: 10px;");
         	messageElement.innerText = text;
             chatBox.appendChild(messageElement);
         }
